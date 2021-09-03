@@ -1,0 +1,159 @@
+﻿@model IEnumerable<acme.estudoemvideo.util.ViewModel.Movie.VideoViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+
+    bool insert = bool.Parse(Context.User.Claims.Where(t => t.Type.Equals("Insert")).Select(t => t.Value).FirstOrDefault());
+    bool update = bool.Parse(Context.User.Claims.Where(t => t.Type.Equals("Update")).Select(t => t.Value).FirstOrDefault());
+    bool delete = bool.Parse(Context.User.Claims.Where(t => t.Type.Equals("Delete")).Select(t => t.Value).FirstOrDefault());
+    bool read = bool.Parse(Context.User.Claims.Where(t => t.Type.Equals("Read")).Select(t => t.Value).FirstOrDefault());
+
+    string botao = "";
+    if (update && delete && read)
+    {
+        botao = "botaoEditarDeletarVisualizar";
+    }
+    else if (update && delete)
+    {
+        botao = "botaoEditarEDeletar";
+    }
+    else if (update)
+    {
+        botao = "botaoEditar";
+    }
+    else if (delete)
+    {
+        botao = "botaoDeletar";
+    }
+    else if (read)
+    {
+        botao = "botaoVisualizar";
+    }
+}
+
+<h2>Vídeo</h2>
+@if (insert)
+{
+    <div>
+        <a class="btn btn-primary" onclick="open_modal_cadastro()">Cadastrar</a>
+    </div>
+}
+<table id="table_video" class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                Video
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Descricao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EnumPopularidade)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Visualizacao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataCriacao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>
+                @if (botao == "botaoEditarDeletarVisualizar")
+                {
+                    @Html.DisplayNameFor(model => model.BotaoEditarDeletarVizualizar)
+                }
+                else if (botao == "botaoEditarEDeletar")
+                {
+                    @Html.DisplayNameFor(model => model.BotaoEditarEDeletar)
+                }
+                else if (botao == "botaoEditar")
+                {
+                    @Html.DisplayNameFor(model => model.BotaoEditar)
+                }
+                else if (botao == "botaoDeletar")
+                {
+                    @Html.DisplayNameFor(model => model.BotaoDeletar)
+                }
+                else if (botao == "botaoVisualizar")
+                {
+                    @Html.DisplayNameFor(model => model.BotaoVizualizar)
+                }
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="image-upload">
+                    <div>
+                        <video id="video" class="img-circle img-responsive" style="width:200px; border-radius: 50px;">
+                            <source src="http://127.0.0.1:8081/videos/@Html.DisplayFor(modelItem => item.NomeArquivo)" type="video/mp4">
+                        </video>
+                    </div>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descricao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EnumPopularidade)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Visualizacao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DataCriacao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    @Html.ActionLink("Payer", "Player", new { id = item.Id }, new { @class = "btn btn-warning" })
+                    @if (botao == "botaoEditarDeletarVisualizar")
+                    {
+                        @Html.Raw(item.BotaoEditarDeletarVizualizar)
+                    }
+                    else if (botao == "botaoEditarEDeletar")
+                    {
+                        @Html.Raw(item.BotaoEditarEDeletar)
+                    }
+                    else if (botao == "botaoEditar")
+                    {
+                        @Html.Raw(item.BotaoEditar)
+                    }
+                    else if (botao == "botaoDeletar")
+                    {
+                        <a class="btn btn-danger" onclick="delete_video('@item.Id')">Remover</a>
+                        @*@Html.DisplayFor(model => item.BotaoDeletar)*@
+                    }
+                    else if (botao == "botaoVisualizar")
+                    {
+                        @Html.Raw(item.BotaoVizualizar)
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div id="md_base" class="modal fade bd-example-modal-sm"
+     tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-cad-menu">
+        <div class="modal-content" id="dv_modal_show_cad">
+
+        </div>
+    </div>
+</div>
+<script src="~/js/Video/video.js"></script>
+<script>
+    $(document).ready(function () {
+        loadgrid_padrao('', '#table_video', [{ data: 'nome' }, { data: 'descricao' }, { data: 'enumPopularidade' }, { data: 'visualizacao' }, { data: 'dataCriacao'},{data: 'status',render: function (data, type) {if (data === 0) {return 'Ativo';}if (data === 1) {return 'Inativo';}}}, { data : '@botao' }]);
+    });
+</script>

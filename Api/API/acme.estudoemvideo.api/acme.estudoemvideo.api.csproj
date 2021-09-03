@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <UserSecretsId>d21e9de6-93d2-4b78-9512-7b6ced37aefb</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerfileContext>..\..</DockerfileContext>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.7" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.7" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.7">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.13" />
+    <PackageReference Include="MySql.EntityFrameworkCore" Version="5.0.3.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.1.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\acme.estudoemvideo.aplication\acme.estudoemvideo.aplication.csproj" />
+    <ProjectReference Include="..\..\acme.estudoemvideo.domain\acme.estudoemvideo.domain.csproj" />
+    <ProjectReference Include="..\..\acme.estudoemvideo.infra\acme.estudoemvideo.infra.csproj" />
+    <ProjectReference Include="..\..\acme.estudoemvideo.services\acme.estudoemvideo.services.csproj" />
+    <ProjectReference Include="..\..\acme.estudoemvideo.util\acme.estudoemvideo.util.csproj" />
+  </ItemGroup>
+
+</Project>

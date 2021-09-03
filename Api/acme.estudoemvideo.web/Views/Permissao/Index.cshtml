@@ -1,0 +1,76 @@
+﻿@model IEnumerable<acme.estudoemvideo.util.ViewModel.Seguranca.Site.PermissaoViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Permissões</h1>
+
+<p>
+    <button class="btn btn-primary" onclick="open_modal('/Permissao/Modal/ModalCadastroPermissao','GET','CADASTRO PERMISSÃO','md_layout','dv_modal_show_cad_layout')">Cadastrar</button>
+</p>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nivel)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BotaoEditarDeletarVizualizar)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BotaoEditarEDeletar)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BotaoEditar)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BotaoDeletar)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BotaoVizualizar)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nivel)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BotaoEditarDeletarVizualizar)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BotaoEditarEDeletar)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BotaoEditar)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BotaoDeletar)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BotaoVizualizar)
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script src="~/js/Securiry/permissao.js"></script>

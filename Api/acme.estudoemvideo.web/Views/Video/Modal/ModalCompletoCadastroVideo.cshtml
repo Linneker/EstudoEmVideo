@@ -1,0 +1,48 @@
+﻿@model acme.estudoemvideo.web.ViewModel.VideoSiteViewModel
+
+@{
+    Layout = null;
+    IEnumerable<SelectListItem> areaDeLazerViewModels = Model.Cetogia;
+
+}
+<div class="row">
+    <div class="col-md-12">
+
+        <form asp-action="ModalCompletoCadastroVideo" id="upload_video" method="post" enctype="multipart/form-data" asp-controller="Video">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Nome" class="control-label"></label>
+                <input id='nome' asp-for="Nome" class="form-control" />
+                <span asp-validation-for="Nome" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Descricao" class="control-label"></label>
+                <input id='descricao' asp-for="Descricao" class="form-control" />
+                <span asp-validation-for="Descricao" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cetogia" class="control-label"></label>
+                <select asp-items="@areaDeLazerViewModels " class ="form-control" id="categoria_id_video"></select>
+                <span asp-validation-for="Cetogia" class="text-danger"></span>
+            </div>
+        </form>
+
+        <form  id="uploadForm" action="/Video/UploadPhysical" method="post"
+              enctype="multipart/form-data" onsubmit="AJAXSubmit(this);return false;">
+
+            <div class="image-upload">
+                <label id="lbl_upload_logo_condominio" for="condominio_cadastro_logo" class="btn btn-primary">
+                    <span>Carregar Video <i class="glyphicon glyphicon-upload"></i></span>
+                </label>
+                <input hidden class="btn btn-primary hidden" id="condominio_cadastro_logo" name="file" type="file" placeholder="Upload Video" />
+            </div>
+            <div style="margin-top:15px">
+                <output form="uploadForm" name="result" id="resultado"></output>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Salvar" class="btn btn-success" />
+            </div>
+        </form>
+      
+    </div>
+</div>

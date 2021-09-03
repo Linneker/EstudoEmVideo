@@ -1,0 +1,99 @@
+﻿@model IEnumerable<acme.estudoemvideo.util.ViewModel.School.Matter.MateriaViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+    bool insert = bool.Parse(Context.User.Claims.Where(t => t.Type.Equals("Insert")).Select(t => t.Value).FirstOrDefault());
+    bool update = bool.Parse(Context.User.Claims.Where(t => t.Type.Equals("Update")).Select(t => t.Value).FirstOrDefault());
+    bool delete = bool.Parse(Context.User.Claims.Where(t => t.Type.Equals("Delete")).Select(t => t.Value).FirstOrDefault());
+    bool read = bool.Parse(Context.User.Claims.Where(t => t.Type.Equals("Read")).Select(t => t.Value).FirstOrDefault());
+
+    string botao = "";
+    if (update && delete && read)
+    {
+        botao = "botaoEditarDeletarVizualizar";
+    }
+    else if (update && delete)
+    {
+        botao = "botaoEditarEDeletar";
+    }
+    else if (update)
+    {
+        botao = "botaoEditar";
+    }
+    else if (delete)
+    {
+        botao = "botaoDeletar";
+    }
+    else if (read)
+    {
+        botao = "botaoVisualizar";
+    }
+}
+
+<h1>Materia</h1>
+
+<p>
+    <button class="btn btn-primary" onclick="open_modal('Modal/ModalCadastroMateria','GET','CADASTRO MATERIA','md_layout','dv_modal_show_cad_layout')">Cadastrar</button>
+</p>
+<table class="table table-striped table-hover" id="tabela_materia">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataCriacao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>
+                Opções
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataCriacao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @if (botao == "botaoEditarDeletarVisualizar")
+                {
+                    @Html.Raw(item.BotaoEditarDeletarVizualizar)
+                }
+                else if (botao == "botaoEditarEDeletar")
+                {
+                    @Html.Raw(item.BotaoEditarEDeletar)
+                }
+                else if (botao == "botaoEditar")
+                {
+                    @Html.Raw(item.BotaoEditar)
+                }
+                else if (botao == "botaoDeletar")
+                {
+                    @Html.Raw(item.BotaoDeletar)
+                }
+                else if (botao == "botaoVisualizar")
+                {
+                    @Html.Raw(item.BotaoVizualizar)
+                }
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+<script src="~/js/School/Matter/materia.js"></script>
+<script>
+    $(document).ready(function () {
+        loadgrid_padrao('/Materia/GetDadosTable', 'tabela_materia',[{ data: 'nome' }, { data: 'dataCriacao' }, {data: 'status',render: function (data, type) {if (data === 0) {return 'Ativo';}if (data === 1) {return 'Inativo';}}}, { data : '@botao' }]);
+    });
+</script>

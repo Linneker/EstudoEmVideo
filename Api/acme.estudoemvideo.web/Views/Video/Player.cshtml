@@ -1,0 +1,16 @@
+﻿@model acme.estudoemvideo.util.ViewModel.Movie.VideoMovieListViewModel;
+
+@{
+    ViewData["Title"] = "Player";
+    string nomeVideo = Model.Video.NomeArquivo;//Model.Video.NomeArquivo;
+}
+
+<h2>Player</h2>
+
+
+
+<h3><a href="@Url.Action("Player", "VideoData")">Download Video</a> </h3>
+<video width="620" height="540" controls autoplay="autoplay">
+    <source src="http://127.0.0.1:8081/videos/@nomeVideo" type="video/mp4">
+</video>
+<script src="~/js/Video/video.js"></script>

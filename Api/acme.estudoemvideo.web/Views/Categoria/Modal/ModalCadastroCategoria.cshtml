@@ -1,0 +1,32 @@
+﻿@model acme.estudoemvideo.util.ViewModel.Movie.Util.CategoriaViewModel
+
+@{
+    ViewData["Title"] = "ModalCadastroCategoria";
+    Layout = null;
+}
+
+<div class="row">
+    <div class="col-md-12">
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Nome" class="control-label"></label>
+                <input asp-for="Nome" class="form-control" id="nome_categoria" />
+                <span asp-validation-for="Nome" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Tipo" class="control-label"></label>
+                <select asp-for="Tipo" class="form-control" id="tipo_categoria" asp-items="Html.GetEnumSelectList<acme.estudoemvideo.util.ViewModel.Enum.EnumTipoCategoriaViewModel>()">
+                    <option value="" selected></option>
+                </select>
+
+                <span asp-validation-for="Tipo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="button" onclick="cadastro_categoria()" value="Cadastrar" class="btn btn-success" />
+            </div>
+    </div>
+</div>
+
+
+

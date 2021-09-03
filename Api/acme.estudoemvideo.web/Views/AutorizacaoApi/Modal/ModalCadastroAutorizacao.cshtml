@@ -1,0 +1,49 @@
+﻿@model acme.estudoemvideo.util.ViewModel.Seguranca.AutorizacaoApiViewModel
+
+@{
+    ViewData["Title"] = "ModalCaadastroAutorizacao";
+    Layout = null;
+    //bool insert = bool.Parse(Context.User.Claims.Where(t => t.Type.Equals("Insert")).Select(t => t.Value).FirstOrDefault());
+    //bool update = bool.Parse(Context.User.Claims.Where(t => t.Type.Equals("Update")).Select(t => t.Value).FirstOrDefault());
+    //bool delete = bool.Parse(Context.User.Claims.Where(t => t.Type.Equals("Delete")).Select(t => t.Value).FirstOrDefault());
+    //bool read = bool.Parse(Context.User.Claims.Where(t => t.Type.Equals("Read")).Select(t => t.Value).FirstOrDefault());
+
+    string botao = "botaoEditarEDeletar";
+    //if (update && delete && read)
+    //{
+    //    botao = "botaoEditarDeletarVisualizar";
+    //}
+    //else if (update && delete)
+    //{
+    //    botao = "botaoEditarEDeletar";
+    //}
+    //else if (update)
+    //{
+    //    botao = "botaoEditar";
+    //}
+    //else if (delete)
+    //{
+    //    botao = "botaoDeletar";
+    //}
+    //else if (read)
+    //{
+    //    botao = "botaoVisualizar";
+    //}
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <form action="/AutorizacaoApi/CadastroAutorizacao" onsubmit="submit_default(this,'Cadastrado','POST','md_default','Parametro','/AutorizacaoApi/GetDadosTable', 'parametro_table',[{ data: 'accessKey' }, { data: 'cnpj' }, {data: 'status',render: function (data, type) {if (data === 0) {return 'Ativo';}if (data === 1) {return 'Inativo';}}}, { data : '@botao' }]); return false;">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="CnpjEmpresa" class="control-label"></label>
+                <input asp-for="CnpjEmpresa" class="form-control" />
+                <span asp-validation-for="CnpjEmpresa" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Cadastrar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+

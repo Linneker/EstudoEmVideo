@@ -1,0 +1,30 @@
+﻿@using acme.estudoemvideo.util.ViewModel.Enum;
+@model acme.estudoemvideo.util.ViewModel.School.Util.BimestreViewModel
+
+@{
+    ViewData["Title"] = "ModalCadastroBimestre";
+    Layout = null;
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <form id="form_add_bimestre" asp-action="ModalCadastroBimestre">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Nome" class="control-label"></label>
+                <input asp-for="Nome" class="form-control" />
+                <span asp-validation-for="Nome" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Status" class="control-label"></label>
+                <select asp-for="Status" asp-items="Html.GetEnumSelectList<EnumStatusViewModel>()" class="form-control">
+                </select>
+                <span asp-validation-for="Status" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <a class="btn btn-primary" onclick="add_bimestre()">Salvar</a>
+            </div>
+        </form>
+    </div>
+</div>
+

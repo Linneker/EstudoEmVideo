@@ -1,0 +1,125 @@
+﻿@model acme.estudoemvideo.util.ViewModel.Site.UsuarioSiteViewModel
+
+@{
+    ViewData["Title"] = "ModalCadastroUsuario";
+    IEnumerable<SelectListItem> permissoes = ViewBag.Permissoes;
+    IEnumerable<SelectListItem> escolas = ViewBag.Escolas;
+    IEnumerable<SelectListItem> materias = ViewBag.Materias;
+    Layout = null;
+}
+<!-- Plugin css for this page -->
+<link rel="stylesheet" href="~/css/select2/select2.min.css">
+<link rel="stylesheet" href="~/css/select2-bootstrap-theme/select2-bootstrap.min.css">
+<!-- End plugin css for this page -->
+
+<div class="row">
+    <div class="col-md-12">
+        <div>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Nome" class="control-label"></label>
+                <input id="nome_usuario" asp-for="Nome" class="form-control" />
+                <span asp-validation-for="Nome" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cpf" class="control-label"></label>
+                <input id="cpf_usuario" asp-for="Cpf" class="form-control" />
+                <span asp-validation-for="Cpf" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input id="email_usuario" asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Telefone" class="control-label"></label>
+                <input id="telefone_usuario" asp-for="Telefone" class="form-control" />
+                <span asp-validation-for="Telefone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DataDeNascimento" class="control-label"></label>
+                <input id="data_nascimento_usuario" asp-for="DataDeNascimento" class="form-control" />
+                <span asp-validation-for="DataDeNascimento" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Senha</label>
+                <input id="senha_usuario" type="password" asp-for="Conta.Senha" class="form-control" />
+                <span asp-validation-for="Conta.Senha" class="text-danger"></span>
+            </div>
+        </div>
+        <div>
+            <div class="form-group">
+                <label class="control-label">Permissões</label>
+                <select asp-items="@permissoes" class="form-control" id="permissao_id_usuario" onchange="exibirEscola()"></select>
+            </div>
+            <div id="escola_professor" class="form-group visually-hidden">
+                <div class="row">
+                    <label class="control-label visually-hidden" id="label_escola">Escolas</label>
+                </div>
+                <select asp-items="@escolas" class="form-control visually-hidden" id="escola_id_usuario_aluno"></select>
+                <div class="row visually-hidden" id="exibir_escola_professor">
+                    <select asp-items="@escolas" style="width:200%" class="stretch-card js-example-basic-multiple w-100 visually-hidden" id="escola_id_usuario_professor" multiple="multiple"></select>
+                </div>
+            </div>
+            <div id="materia_professor" class="form-group visually-hidden">
+                <div class="row">
+                    <label class="control-label visually-hidden" id="label_materias">Materias</label>
+                </div>
+                <select asp-items="@materias" class="form-control visually-hidden" id="escola_id_usuario_aluno"></select>
+                <div class="row visually-hidden" id="exibir_materias_professor">
+                    <select asp-items="@materias" style="width:200%" class="stretch-card js-example-basic-multiple w-100 visually-hidden" id="materia_id_usuario_professor" multiple="multiple"></select>
+                </div>
+            </div>
+            <div class="form form-check">
+                <div class="col-12 form-check-inline">
+                    <div class="col-6">
+                        <div class="form-check form-switch">
+                            <input id="add_usuario" type="checkbox" asp-for="Conta.PermissaoConta.Add" class="form-check-input" />
+                            <label class="form-check-label" for="add_usuario">Adicionar</label>
+                            <span asp-validation-for="Conta.PermissaoConta.Add" class="text-danger"></span>
+                        </div>
+                        <div class="form-check form-switch">
+                            <input id="update_usuario" type="checkbox" asp-for="Conta.PermissaoConta.Update" class="form-check-input" />
+                            <label class="form-check-label" for="update_usuario">Atualizar</label>
+                            <span asp-validation-for="Conta.PermissaoConta.Update" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-7">
+                        <div class="form-check form-switch">
+                            <input id="delete_usuario" type="checkbox" asp-for="Conta.PermissaoConta.Delete" class="form-check-input" />
+                            <label class="form-check-label" for="delete_usuario">Remover</label>
+                            <span asp-validation-for="Conta.PermissaoConta.Delete" class="text-danger"></span>
+                        </div>
+                        <div class="form-check form-switch">
+                            <input id="read_usuario" type="checkbox" asp-for="Conta.PermissaoConta.Read" class="form-check-input" />
+                            <label class="form-check-label" for="read_usuario">Vizualizar</label>
+                            <span asp-validation-for="Conta.PermissaoConta.Read" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group d-flex justify-content-center">
+                    <div class="form-check form-switch">
+                        <input id="permissao_valida_usuario" type="checkbox" asp-for="Conta.PermissaoConta.PermissaoValida" class="form-check-input" />
+                        <label class="form-check-label" for="permissao_valida_usuario">Permissão Valida</label>
+                        <span asp-validation-for="Conta.PermissaoConta.PermissaoValida" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group d-flex justify-content-center">
+                    <div class="form-check form-switch">
+                        <input id="termo_de_aceite_usuario" type="checkbox" asp-for="Conta.TermoDeAceite" class="form-check-input" />
+                        <label class="form-check-label" for="termo_de_aceite_usuario"><a>Termo de Aceite</a></label>
+                        <span asp-validation-for="Conta.TermoDeAceite" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr />
+    <div class="form-group">
+        <input type="button" onclick="add()" value="Salvar" class="btn btn-primary" />
+    </div>
+
+</div>
+<script src="~/node_modules/bootstrap-select/dist/js/i18n/defaults-pt_BR.min.js"></script>
+<script src="~/js/select2.min.js"></script>
+<script src="~/js/select2.js"></script>

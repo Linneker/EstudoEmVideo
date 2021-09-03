@@ -1,0 +1,72 @@
+﻿@model acme.estudoemvideo.util.ViewModel.Util.MenuViewModel
+@using acme.estudoemvideo.util.ViewModel.Seguranca.Site; 
+@{
+    ViewData["Title"] = "ModalCadastroMenu";
+    List<PermissaoViewModel> PermissoesMenus = new List<PermissaoViewModel>();
+    PermissoesMenus = ViewBag.PermissaoMenu;
+    IEnumerable<SelectListItem> menuViewModel = ViewBag.MenusPais;
+    Layout = null;
+}
+
+<div class="row form_wizard wizard_horizontal">
+    <div class="col-md-12">
+        <form asp-action="ModalCadastroMenu">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Nome" class="control-label"></label>
+                <input asp-for="Nome" class="form-control" />
+                <span asp-validation-for="Nome" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Caminho" class="control-label"></label>
+                <input asp-for="Caminho" class="form-control" />
+                <span asp-validation-for="Caminho" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Descricao" class="control-label"></label>
+                <input asp-for="Descricao" class="form-control" />
+                <span asp-validation-for="Descricao" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Icone" class="control-label"></label>
+                <input asp-for="Icone" class="form-control" />
+                <span asp-validation-for="Icone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Posicao" class="control-label"></label>
+                <input asp-for="Posicao" class="form-control" />
+                <span asp-validation-for="Posicao" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MenuIdPai" class="control-label"></label>
+                <select id="MenuIdPai" asp-items="@menuViewModel" class="form-control select2 select2-with-icons" style="width:100%;"></select>
+                <span asp-validation-for="MenuIdPai" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="PermissoesMenus" class="control-label"></label>
+
+            </div>
+            <div class="form-group">
+                <select asp-for="PermissoesMenus" id="permissao_menu" class="form-control select2 select2-with-icons" multiple style="width:100%;">
+                    @foreach (var permissao in PermissoesMenus)
+                    {
+                        <option value="@permissao.Id">@permissao.Nome</option>
+                    }
+                </select>
+                <span asp-validation-for="PermissoesMenus" class="text-danger"></span>
+            </div>
+        </form>
+        <hr />
+        <div class="form-group">
+            <a class="btn btn-primary" onclick="add_menu()">Salvar</a>
+        </div>
+    </div>
+</div>
+
+
+<!-- End SmartWizard Content -->
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

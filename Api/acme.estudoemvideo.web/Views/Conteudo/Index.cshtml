@@ -1,0 +1,83 @@
+﻿@model IEnumerable<acme.estudoemvideo.util.ViewModel.School.Matter.ConteudoViewModel>
+
+@{
+    ViewData["Title"] = "Conteúdo";
+    bool insert = bool.Parse(Context.User.Claims.Where(t => t.Type.Equals("Insert")).Select(t => t.Value).FirstOrDefault());
+    bool update = bool.Parse(Context.User.Claims.Where(t => t.Type.Equals("Update")).Select(t => t.Value).FirstOrDefault());
+    bool delete = bool.Parse(Context.User.Claims.Where(t => t.Type.Equals("Delete")).Select(t => t.Value).FirstOrDefault());
+    bool read = bool.Parse(Context.User.Claims.Where(t => t.Type.Equals("Read")).Select(t => t.Value).FirstOrDefault());
+
+    string botao = "";
+    if (update && delete && read)
+    {
+        botao = "botaoEditarDeletarVizualizar";
+    }
+    else if (update && delete)
+    {
+        botao = "botaoEditarEDeletar";
+    }
+    else if (update)
+    {
+        botao = "botaoEditar";
+    }
+    else if (delete)
+    {
+        botao = "botaoDeletar";
+    }
+    else if (read)
+    {
+        botao = "botaoVisualizar";
+    }
+}
+<script src="~/js/School/Matter/conteudo.js"></script>
+
+<h1>Conteúdo</h1>
+
+<p>
+    <button class="btn btn-primary" onclick="open_modal('Modal/ModalCadastroConteudo','GET','CADASTRO CONTEÚDO','md_layout','dv_modal_show_cad_layout')">Cadastrar</button>
+</p>
+<table class="table table-striped table-hover" id="tabela_conteudo">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Descricao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>
+                @if (botao == "botaoEditarDeletarVisualizar")
+                {
+                    @Html.DisplayNameFor(model => model.BotaoEditarDeletarVizualizar)
+                }
+                else if (botao == "botaoEditarEDeletar")
+                {
+                    @Html.DisplayNameFor(model => model.BotaoEditarEDeletar)
+                }
+                else if (botao == "botaoEditar")
+                {
+                    @Html.DisplayNameFor(model => model.BotaoEditar)
+                }
+                else if (botao == "botaoDeletar")
+                {
+                    @Html.DisplayNameFor(model => model.BotaoDeletar)
+                }
+                else if (botao == "botaoVisualizar")
+                {
+                    @Html.DisplayNameFor(model => model.BotaoVizualizar)
+                }
+            </th>
+        </tr>
+    </thead>
+</table>
+
+
+
+<script>
+    $(document).ready(function () {
+        loadgrid_padrao('/Conteudo/GetDadosTable', 'tabela_conteudo', [{ data: 'nome' }, { data: 'descricao' }, {data: 'status',render: function (data, type) {if (data === 0) {return 'Ativo';}if (data === 1) {return 'Inativo';}}}, { data : '@botao' }]);
+    });
+</script>

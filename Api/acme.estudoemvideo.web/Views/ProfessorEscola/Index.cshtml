@@ -1,0 +1,113 @@
+﻿@model IEnumerable<acme.estudoemvideo.util.ViewModel.School.ProfessorEscolaViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.PopularidadeProfessor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UsuarioId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EscolaId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataCriacao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataModificacao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataInativacao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BotaoEditarDeletarVizualizar)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BotaoEditarEDeletar)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BotaoEditar)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BotaoDeletar)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BotaoVizualizar)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HasNotifications)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PopularidadeProfessor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UsuarioId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EscolaId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataCriacao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataModificacao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataInativacao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BotaoEditarDeletarVizualizar)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BotaoEditarEDeletar)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BotaoEditar)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BotaoDeletar)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BotaoVizualizar)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HasNotifications)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

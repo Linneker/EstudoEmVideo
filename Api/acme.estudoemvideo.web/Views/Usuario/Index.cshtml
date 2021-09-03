@@ -1,0 +1,90 @@
+﻿@model IEnumerable<acme.estudoemvideo.util.ViewModel.User.UsuarioViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <button class="btn btn-primary" onclick="open_modal('/Usuario/Modal/ModalCadastroUsuario','GET','CADASTRO USUARIO','md_layout','dv_modal_show_cad_layout')">Cadastrar</button>
+</p>
+<table  class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cpf)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Telefone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataDeNascimento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataCriacao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BotaoEditarDeletarVizualizar)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cpf)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Telefone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DataDeNascimento)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DataCriacao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                @*<td>
+                    @Html.DisplayFor(modelItem => item.BotaoEditarDeletarVizualizar)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BotaoEditarEDeletar)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BotaoEditar)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BotaoDeletar)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BotaoVizualizar)
+                </td>*@
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<script src="~/js/User/usuario.js"></script>

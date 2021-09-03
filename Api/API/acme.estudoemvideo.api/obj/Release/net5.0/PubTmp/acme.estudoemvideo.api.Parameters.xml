@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="IIS Web Application Name" description="" value="estudoemvideo.com.br" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\projetos\\Acme\\EstudoEmVideo\\Api\\API\\acme\.estudoemvideo\.api\\obj\\Release\\net5\.0\\PubTmp\\Out\\$" />
+  </parameter>
+</parameters>

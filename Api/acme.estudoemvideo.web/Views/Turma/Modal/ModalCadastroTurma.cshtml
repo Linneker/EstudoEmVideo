@@ -1,0 +1,125 @@
+﻿@model acme.estudoemvideo.util.ViewModel.School.TurmaViewModel
+
+@{
+    ViewData["Title"] = "CadastroModalTurma";
+    IEnumerable<SelectListItem> escolas = ViewBag.Escolas;
+    IEnumerable<SelectListItem> bimestre = ViewBag.Bimestres;
+    IEnumerable<SelectListItem> serie = ViewBag.Series;
+    IEnumerable<SelectListItem> professores = ViewBag.Professores;
+    IEnumerable<SelectListItem> alunos = ViewBag.Alunos;
+    IEnumerable<SelectListItem> materias = ViewBag.Materias;
+
+    bool insert = bool.Parse(Context.User.Claims.Where(t => t.Type.Equals("Insert")).Select(t => t.Value).FirstOrDefault());
+    bool update = bool.Parse(Context.User.Claims.Where(t => t.Type.Equals("Update")).Select(t => t.Value).FirstOrDefault());
+    bool delete = bool.Parse(Context.User.Claims.Where(t => t.Type.Equals("Delete")).Select(t => t.Value).FirstOrDefault());
+    bool read = bool.Parse(Context.User.Claims.Where(t => t.Type.Equals("Read")).Select(t => t.Value).FirstOrDefault());
+
+    string botao = "";
+    if (update && delete && read)
+    {
+        botao = "botaoEditarDeletarVisualizar";
+    }
+    else if (update && delete)
+    {
+        botao = "botaoEditarEDeletar";
+    }
+    else if (update)
+    {
+        botao = "botaoEditar";
+    }
+    else if (delete)
+    {
+        botao = "botaoDeletar";
+    }
+    else if (read)
+    {
+        botao = "botaoVisualizar";
+    }
+    Layout = null;
+}
+<!-- Plugin css for this page -->
+<link rel="stylesheet" href="~/css/select2/select2.min.css">
+<link rel="stylesheet" href="~/css/select2-bootstrap-theme/select2-bootstrap.min.css">
+<!-- End plugin css for this page -->
+
+<div class="row">
+    <div class="col-md-12">
+        <form action="/Turma/Cadastro" onsubmit="submit_default_substituto(this,'Cadastrado','POST','dv_modal_show_cad_layout','Serie','/Turma/GetDadosTable', 'tabela_turma',[{ data: 'nome' },{ data: 'periodo' },{ data: 'serieId' },{ data: 'escolaId' }, { data: 'dataCriacao' }, {data: 'status',render: function (data, type) {if (data === 0) {return 'Ativo';}if (data === 1) {return 'Inativo';}}}, { data : '@botao' }]); return false;">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Nome" class="control-label"></label>
+                <input asp-for="Nome" class="form-control" id="cad_turma_nome" />
+                <span asp-validation-for="Nome" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Periodo" class="control-label"></label>
+                <select asp-for="Periodo" class="form-control" id="cad_turma_periodo" asp-items="Html.GetEnumSelectList<acme.estudoemvideo.util.ViewModel.Enum.EnumPeriodoViewModel>()">
+                    <option value="" selected></option>
+                </select>
+                <span asp-validation-for="Periodo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EscolaId" class="control-label"></label>
+                <select asp-items="@escolas" class="form-control" id="cad_turma_escola" onchange="exibirProfessorluno()"></select>
+                <span asp-validation-for="EscolaId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SerieId" class="control-label"></label>
+                <select asp-items="@serie" class="form-control" id="cad_turma_serie"></select>
+                <span asp-validation-for="SerieId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <label asp-for="TurmaBimestres" class="control-label"></label>
+                </div>
+                <div class="row">
+                    <select id="cad_turma_bimestre" asp-items="@bimestre" style="width:200%" class="stretch-card js-example-basic-multiple w-100" multiple="multiple"></select>
+                </div>
+                <span asp-validation-for="TurmaBimestres" class="text-danger"></span>
+            </div>
+            <div class="form-group visually-hidden" id="div_turma_professor_escola">
+                <div class="row">
+                    <label asp-for="TurmaProfessorEscolas" class="control-label"></label>
+                </div>
+                <div class="row">
+                    <select id="cad_turma_professor_escola" onchange="exibirMateria()" style="width:200%" class="stretch-card js-example-basic-multiple w-100" multiple="multiple"></select>
+                </div>
+                <span asp-validation-for="TurmaProfessorEscolas" class="text-danger"></span>
+            </div>
+            <div class="form-group visually-hidden" id="div_turma_aluno_escola">
+                <div class="row">
+                    <label asp-for="TurmasAlunosEscolas" class="control-label"></label>
+                </div>
+                <div class="row">
+                    <select id="cad_turma_alunos_escola" style="width:200%" class="stretch-card js-example-basic-multiple w-100" multiple="multiple"></select>
+                </div>
+                <span asp-validation-for="TurmasAlunosEscolas" class="text-danger"></span>
+            </div>
+            <div class="form-group visually-hidden" id="div_turma_materia_professor">
+                <div class="row">
+                    <label asp-for="TurmaMaterias" class="control-label"></label>
+                </div>
+                <div class="row">
+                    <select id="cad_turma_materia" asp-items="@materias" style="width:200%" class="stretch-card js-example-basic-multiple w-100" multiple="multiple">
+                    </select>
+                </div>
+                <span asp-validation-for="TurmaMaterias" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+<script src="~/node_modules/bootstrap-select/dist/js/i18n/defaults-pt_BR.min.js"></script>
+<script src="~/js/select2.min.js"></script>
+<script src="~/js/select2.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#cad_modal_bimestre').selectpicker();
+        $('#cad_turma_materia_professor_escola').selectpicker();
+        $('#cad_turma_alunos_escola').selectpicker();
+    });
+</script>

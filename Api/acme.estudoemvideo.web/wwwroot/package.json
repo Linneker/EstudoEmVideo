@@ -1,0 +1,19 @@
+{
+  "name": "wwwroot",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.15.3",
+    "@popperjs/core": "^2.9.2",
+    "bootstrap": "^5.0.1",
+    "bootstrap-datepicker": "^1.9.0",
+    "bootstrap-select": "^1.13.18",
+    "datatables": "^1.10.18",
+    "datatables.net-bs5": "^1.10.25",
+    "datatables.net-dt": "^1.10.25",
+    "jquery": "^3.6.0",
+    "jquery.easing": "^1.4.1",
+    "jquery.maskedinput": "^1.4.1"
+  }
+}

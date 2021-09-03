@@ -1,0 +1,119 @@
+﻿@model IEnumerable<acme.estudoemvideo.util.ViewModel.School.EscolaViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+    bool insert = bool.Parse(Context.User.Claims.Where(t => t.Type.Equals("Insert")).Select(t => t.Value).FirstOrDefault());
+    bool update = bool.Parse(Context.User.Claims.Where(t => t.Type.Equals("Update")).Select(t => t.Value).FirstOrDefault());
+    bool delete = bool.Parse(Context.User.Claims.Where(t => t.Type.Equals("Delete")).Select(t => t.Value).FirstOrDefault());
+    bool read = bool.Parse(Context.User.Claims.Where(t => t.Type.Equals("Read")).Select(t => t.Value).FirstOrDefault());
+
+    string botao = "";
+    if (update && delete && read)
+    {
+        botao = "botaoEditarDeletarVizualizar";
+    }
+    else if (update && delete)
+    {
+        botao = "botaoEditarEDeletar";
+    }
+    else if (update)
+    {
+        botao = "botaoEditar";
+    }
+    else if (delete)
+    {
+        botao = "botaoDeletar";
+    }
+    else if (read)
+    {
+        botao = "botaoVisualizar";
+    }
+}
+
+<h1>Index</h1>
+
+<p>
+    <button class="btn btn-primary" onclick="open_modal_xg('/Escola/Modal/ModalCadastroEscola','GET','CADASTRO ESCOLA','md_default_xg','dv_modal_show_default_xg')">Cadastrar</button>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cnpj)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataCriacao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataModificacao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataInativacao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BotaoEditarDeletarVizualizar)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cnpj)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DataCriacao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DataModificacao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DataInativacao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    @if (botao == "botaoEditarDeletarVisualizar")
+                    {
+                        @Html.Raw(item.BotaoEditarDeletarVizualizar)
+                    }
+                    else if (botao == "botaoEditarEDeletar")
+                    {
+                        @Html.Raw(item.BotaoEditarEDeletar)
+                    }
+                    else if (botao == "botaoEditar")
+                    {
+                        @Html.Raw(item.BotaoEditar)
+                    }
+                    else if (botao == "botaoDeletar")
+                    {
+                        @Html.Raw(item.BotaoDeletar)
+                    }
+                    else if (botao == "botaoVisualizar")
+                    {
+                        @Html.Raw(item.BotaoVizualizar)
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<script src="~/node_modules/jquery.maskedinput/src/jquery.maskedinput.js" type="text/javascript"></script>
+<script src="~/js/School/escola.js"></script>

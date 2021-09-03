@@ -1,0 +1,42 @@
+﻿@model acme.estudoemvideo.util.ViewModel.School.AlunoEscolaViewModel
+
+@{
+    ViewData["Title"] = "Cadastro Aluno Escola";
+    Layout = null;
+}
+
+<h1>Cadastro Aluno Escola</h1>
+
+<h4>Aluno Escola</h4>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="ModalCadastroAlunoEscola">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="DataAlunoEscola" class="control-label"></label>
+                <input asp-for="DataAlunoEscola" class="form-control" />
+                <span asp-validation-for="DataAlunoEscola" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DataMatriculaAlunoNaEscola" class="control-label"></label>
+                <input asp-for="DataMatriculaAlunoNaEscola" class="form-control" />
+                <span asp-validation-for="DataMatriculaAlunoNaEscola" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Matricula" class="control-label"></label>
+                <input asp-for="Matricula" class="form-control" />
+                <span asp-validation-for="Matricula" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Status" class="control-label"></label>
+                <input asp-for="Status" class="form-control" />
+                <span asp-validation-for="Status" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+

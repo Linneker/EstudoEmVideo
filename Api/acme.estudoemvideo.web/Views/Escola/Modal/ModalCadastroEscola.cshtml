@@ -1,0 +1,79 @@
+﻿@model acme.estudoemvideo.util.ViewModel.School.EscolaViewModel
+
+@{
+    ViewData["Title"] = "ModalCadastroEscola";
+    Layout = null;
+}
+@*21862288233*@
+
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="ModalCadastroEscola" id="modal_cadastro_escola">
+            <nav>
+                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                    <button class="nav-link disabled active" id="nav-escola-tab" data-bs-toggle="tab" data-bs-target="#nav-escola" type="button" role="tab" aria-controls="nav-escola" aria-selected="true">Dados Escola</button>
+                    <button class="nav-link disabled" id="nav-endereco-escola-tab" data-bs-toggle="tab" data-bs-target="#nav-endereco-escola" type="button" role="tab" aria-controls="nav-endereco-escola" aria-selected="false">Endereço Escola</button>
+                </div>
+            </nav>
+            <div class="tab-content">
+                <div class="tab-pane fade show active" id="nav-escola" role="tabpanel" aria-labelledby="nav-escola-tab">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="Nome" class="control-label" id="nome_escola_label"></label>
+                        <input asp-for="Nome" class="form-control" id="nome_escola" />
+                        <span asp-validation-for="Nome" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Cnpj" class="control-label"></label>
+                        <input asp-for="Cnpj" class="form-control" id="cnpj_escola" />
+                        <span asp-validation-for="Cnpj" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="button" value="Proximo" onclick="proximo_escola()" class="btn btn-primary" />
+                    </div>
+                </div>
+                <div class="tab-pane fade hide" id="nav-endereco-escola" role="tabpanel" aria-labelledby="nav-endereco-escola-tab">
+                    <div class="form-group">
+                        <label class="control-label">Cep</label>
+                        <input class="form-control" id="cep_escola" />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Estado</label>
+                        <input class="form-control" id="estado_escola" />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Cidade</label>
+                        <input class="form-control" id="cidade_escola" />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Bairro</label>
+                        <input class="form-control" id="bairro_escola" />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Rua</label>
+                        <input class="form-control" id="rua_escola" />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Numero</label>
+                        <input class="form-control" id="numero_escola" />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Complemento</label>
+                        <input class="form-control" id="complemento_escola" />
+                    </div>
+                    <div class="form-group">
+                        <input type="button" value="Anterior" onclick="anterior_escola()" class="btn btn-primary" />
+                        <input type="button" value="Salvar" onclick="salvar_escola()" class="btn btn-primary" />
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#cnpj_escola").mask("99.999.999/9999-99");
+    });
+</script>

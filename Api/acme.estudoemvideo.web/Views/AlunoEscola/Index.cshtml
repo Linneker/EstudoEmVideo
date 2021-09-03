@@ -1,0 +1,86 @@
+﻿@model IEnumerable<acme.estudoemvideo.util.ViewModel.School.AlunoEscolaViewModel>
+
+@{
+    ViewData["Title"] = "Aluno";
+}
+<h1>Aluno</h1>
+
+<div>
+    <a asp-action="Create" class="btn btn-success">Cadastrar</a>
+</div>
+<div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.DataAlunoEscola)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DataMatriculaAlunoNaEscola)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Matricula)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Status)
+                </th>
+                @if (true)
+                {
+                    <th>
+                        @Html.DisplayNameFor(model => model.BotaoEditarDeletarVizualizar)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.BotaoEditarEDeletar)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.BotaoEditar)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.BotaoDeletar)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.BotaoVizualizar)
+                    </th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DataAlunoEscola)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DataMatriculaAlunoNaEscola)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Matricula)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Status)
+                    </td>
+                    @if (true)
+                    {
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BotaoEditarDeletarVizualizar)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BotaoEditarEDeletar)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BotaoEditar)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BotaoDeletar)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BotaoVizualizar)
+                        </td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

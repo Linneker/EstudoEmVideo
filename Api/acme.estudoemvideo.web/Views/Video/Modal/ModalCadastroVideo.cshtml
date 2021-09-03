@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewData["Title"] = "Cadastro Video";
+    Layout = null;
+}
+
+<h2>Cadastro</h2>
+
+<form id="condominio_img_upload_logo" method="post" enctype="multipart/form-data" asp-controller="Upload" asp-action="UploadVideo">
+    <div class="image-upload">
+        <label id="lbl_upload_logo_condominio" for="condominio_cadastro_logo" class="btn btn-primary">
+            <span>Carregar Logo <i class="glyphicon glyphicon-upload"></i></span>
+        </label>
+        <input hidden class="btn btn-primary hidden" id="condominio_cadastro_logo" name="logo" type="file" placeholder="Upload Logo" onchange="carregar(this)" />
+    </div>
+    <div id="imagem_apos_load">
+    </div>
+</form>
+

@@ -1,0 +1,54 @@
+﻿@model IEnumerable<acme.estudoemvideo.util.ViewModel.Seguranca.AutorizacaoApiViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Autorização API</h1>
+
+<p>
+    <button class="btn btn-primary" onclick="open_modal('Modal/ModalCadastroAutorizacao','GET','Cadastro de Autorização','','')">Cadastrar</button>
+</p></p>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.AccessKey)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CnpjEmpresa)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AccessKey)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CnpjEmpresa)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }, new { @class="btn btn-warning"}) |
+                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ }, new { @class = "btn btn-danger" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div id="md_cad_autorizacao" class="modal fade bd-example-modal-sm"
+     tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-cad-menu">
+        <div class="modal-content" id="dv_modal_show_cad_autorizacao">
+
+        </div>
+    </div>
+</div>
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script type="text/javascript" src="~/js/Securiry/autorizacao.js"></script>

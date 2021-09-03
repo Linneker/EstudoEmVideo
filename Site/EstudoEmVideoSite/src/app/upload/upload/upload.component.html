@@ -1,0 +1,27 @@
+<div class="custom-file">
+    <label for="formFileDisabled" class="form-label">Disabled file input example</label>
+    <input class="form-control" type="file" id="formFileDisabled" (change)="OnChange($event)" />
+</div>
+<form id="uploadForm" action="https://localhost:5001/Video/UploadPhysical" method="post"
+      enctype="multipart/form-data" [onsubmit]="AJAXSubmit(this);">
+    <dl>
+        <dt>
+            <label for="file">File</label>
+        </dt>
+        <dd>
+            <input id="file" type="file" name="file" />
+        </dd>
+    </dl>
+
+    <input class="btn" type="submit" value="Upload" />
+
+    <div style="margin-top:15px">
+        <output form="uploadForm" name="result"></output>
+    </div>
+</form>
+
+<div>
+  <video width="500" height="300" controls>
+    <source  type="video/mp4">
+  </video>
+</div>

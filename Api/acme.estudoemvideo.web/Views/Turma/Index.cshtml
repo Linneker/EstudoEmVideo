@@ -1,0 +1,111 @@
+﻿@model IEnumerable<acme.estudoemvideo.util.ViewModel.School.TurmaViewModel>
+
+@{
+    ViewData["Title"] = "Turma";
+    bool insert = bool.Parse(Context.User.Claims.Where(t => t.Type.Equals("Insert")).Select(t => t.Value).FirstOrDefault());
+    bool update = bool.Parse(Context.User.Claims.Where(t => t.Type.Equals("Update")).Select(t => t.Value).FirstOrDefault());
+    bool delete = bool.Parse(Context.User.Claims.Where(t => t.Type.Equals("Delete")).Select(t => t.Value).FirstOrDefault());
+    bool read = bool.Parse(Context.User.Claims.Where(t => t.Type.Equals("Read")).Select(t => t.Value).FirstOrDefault());
+
+    string botao = "";
+    if (update && delete && read)
+    {
+        botao = "botaoEditarDeletarVisualizar";
+    }
+    else if (update && delete)
+    {
+        botao = "botaoEditarEDeletar";
+    }
+    else if (update)
+    {
+        botao = "botaoEditar";
+    }
+    else if (delete)
+    {
+        botao = "botaoDeletar";
+    }
+    else if (read)
+    {
+        botao = "botaoVisualizar";
+    }
+}
+
+<h1>Turma</h1>
+
+<div>
+    <button class="btn btn-primary" onclick="open_modal_xg('/Turma/Modal/ModalCadastroTurma','GET','CADASTRO TURMA','md_default_xg','dv_modal_show_default_xg')">Cadastrar</button>
+</div>
+<table class="table table-responsive-sm">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Periodo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SerieId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EscolaId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataCriacao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Periodo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SerieId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EscolaId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DataCriacao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    @if (botao == "botaoEditarDeletarVisualizar")
+                    {
+                        @Html.Raw(item.BotaoEditarDeletarVizualizar)
+                    }
+                    else if (botao == "botaoEditarEDeletar")
+                    {
+                        @Html.Raw(item.BotaoEditarEDeletar)
+                    }
+                    else if (botao == "botaoEditar")
+                    {
+                        @Html.Raw(item.BotaoEditar)
+                    }
+                    else if (botao == "botaoDeletar")
+                    {
+                        <a class="btn btn-danger" onclick="delete_video('@item.Id')">Remover</a>
+                        @Html.Raw(item.BotaoDeletar)
+                    }
+                    else if (botao == "botaoVisualizar")
+                    {
+                        @Html.Raw(item.BotaoVizualizar)
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<script src="~/js/School/turma.js"></script>

@@ -1,0 +1,22 @@
+﻿################################################################################
+# Este arquivo .gitignore foi criado automaticamente pelo Microsoft(R) Visual Studio.
+################################################################################
+
+/Api/acme.estudoemvideo.web/wwwroot/node_modules
+/Api/acme.estudoemvideo.web/bin
+/Api/acme.estudoemvideo.web/obj
+/Api/acme.estudoemvideo.services/obj
+/Api/acme.estudoemvideo.services/bin
+/Api/acme.estudoemvideo.infra/obj
+/Api/acme.estudoemvideo.infra/bin
+/Api/acme.estudoemvideo.aplication/bin
+/Api/acme.estudoemvideo.aplication/obj
+/Api/acme.estudoemvideo.domain/bin
+/Api/acme.estudoemvideo.domain/obj
+/Api/acme.estudoemvideo.util/obj
+/Api/acme.estudoemvideo.util/bin
+/Api/acme.estudoemvideo.api/bin
+/Api/acme.estudoemvideo.api/obj
+/Api/acme.estudoemvideo.web/wwwroot/arquivo/video
+/Api/acme.estudoemvideo.site/wwwroot/arquivo/video
+/Api/acme.estudoemvideo.site

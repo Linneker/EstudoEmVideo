@@ -1,0 +1,73 @@
+﻿@model IEnumerable<acme.estudoemvideo.util.ViewModel.Util.MenuViewModel>
+
+@{
+    ViewData["Title"] = "Menu";
+}
+
+<h1>Menu</h1>
+
+<p>
+    <a onclick="open_modal('Modal/ModalCadastroMenu','GET','Cadastro de Menu','','')" class="btn btn-success">Cadastrar</a>
+</p>
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Caminho)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Descricao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Icone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Posicao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MenuIdPai)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BotaoEditarDeletarVizualizar)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.Raw(item.Nome)
+                </td>
+                <td>
+                    @Html.Raw(item.Caminho)
+                </td>
+                <td>
+                    @Html.Raw(item.Descricao)
+                </td>
+                <td>
+                    @Html.Raw(item.Icone)
+                </td>
+                <td>
+                    @Html.Raw(item.Posicao)
+                </td>
+                <td>
+                    @Html.Raw(item.MenuIdPai)
+                </td>
+                <td>
+                    @Html.Raw(item.Status)
+                </td>
+                <td>
+                    @Html.Raw(item.BotaoEditarDeletarVizualizar)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<script src="~/js/Util/menu_adm.js"></script>
