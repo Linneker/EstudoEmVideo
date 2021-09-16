@@ -20,7 +20,9 @@ namespace acme.estudoemvideo.infra.Map.Diary
             builder.Property(t => t.DataInativacao).IsRequired(false);
             builder.Property(t => t.Status).HasDefaultValue(EnumStatus.Ativo);
 
-            builder.Property(t => t.Data);
+            builder.Property(t => t.Ano);
+            builder.Property(t => t.Mes);
+            builder.Property(t => t.Dia);
             builder.Property(t => t.DiaLetivo).HasDefaultValue(true);
             builder.Property(t => t.FeiradoEscolar).HasDefaultValue(false);
             builder.Property(t => t.FeiradoEstadual).HasDefaultValue(false);

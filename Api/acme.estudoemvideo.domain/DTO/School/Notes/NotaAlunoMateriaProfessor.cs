@@ -1,4 +1,5 @@
 ﻿using acme.estudoemvideo.domain.DTO.School.Matter;
+using acme.estudoemvideo.domain.DTO.School.Util;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -10,6 +11,7 @@ namespace acme.estudoemvideo.domain.DTO.School.Notes
         public NotaAlunoMateriaProfessor()
         {
             NotaAlunoMateriaConteudos = new HashSet<NotaAlunoMateriaConteudo>();
+            Boletins = new HashSet<Boletim>();
         }
 
         public Guid NotaId { get; set; }
@@ -23,5 +25,6 @@ namespace acme.estudoemvideo.domain.DTO.School.Notes
         public virtual ProfessorEscola ProfessorEscola { get; set; }
         
         public virtual ICollection<NotaAlunoMateriaConteudo> NotaAlunoMateriaConteudos { get; set; }
+        public virtual ICollection<Boletim> Boletins { get; set; }
     }
 }

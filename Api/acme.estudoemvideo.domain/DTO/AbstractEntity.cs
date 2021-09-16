@@ -28,7 +28,7 @@ namespace acme.estudoemvideo.domain.DTO
 
         public EnumStatus Status { get; set; }
         [NotMapped]
-        public virtual string BotaoEditarDeletarVizualizar { get; set; }
+        public virtual string BotaoEditarDeletarVisualizar { get; set; }
 
         [NotMapped]
         public virtual string BotaoEditarEDeletar { get; set; }

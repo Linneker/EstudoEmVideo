@@ -42,14 +42,17 @@ namespace acme.estudoemvideo.infra.Repository.School
         {
             var query = (from ae in _db.AlunoEscolas
                          where ae.EscolaId.Equals(escolaId)
-                         select ae).Include(t=>t.Aluno).ThenInclude(t=>t.Contas).AsNoTracking().ToListAsync<AlunoEscola>();
+                         select ae).Include(t=>t.Usuario)
+                         .ThenInclude(t=>t.Contas)
+                         .AsNoTracking()
+                         .ToListAsync<AlunoEscola>();
             return query;
         }
 
         public List<AlunoEscola> GetAlunoEscolaByMatricula(long matricula)
         {
             var query = (from alEsc in _db.AlunoEscolas
-                         join aluno in _db.Usuarios on alEsc.Aluno.Id equals aluno.Id
+                         join aluno in _db.Usuarios on alEsc.Usuario.Id equals aluno.Id
                          join escola in _db.Escolas on alEsc.Escola.Id equals escola.Id
                          where alEsc.Matricula == matricula
                          select alEsc).AsNoTracking().ToList<AlunoEscola>();
@@ -58,7 +61,7 @@ namespace acme.estudoemvideo.infra.Repository.School
         public Task<List<AlunoEscola>> GetAlunoEscolaByMatriculaAsync(long matricula)
         {
             var query = (from alEsc in _db.AlunoEscolas
-                         join aluno in _db.Usuarios on alEsc.Aluno.Id equals aluno.Id
+                         join aluno in _db.Usuarios on alEsc.Usuario.Id equals aluno.Id
                          join escola in _db.Escolas on alEsc.Escola.Id equals escola.Id
                          where alEsc.Matricula == matricula
                          select alEsc).AsNoTracking().ToListAsync<AlunoEscola>();

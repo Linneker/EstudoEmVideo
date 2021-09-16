@@ -69,8 +69,8 @@ namespace acme.estudoemvideo.infra.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("varbinary(16)");
 
-                    b.Property<DateTime>("Data")
-                        .HasColumnType("datetime");
+                    b.Property<int>("Ano")
+                        .HasColumnType("int");
 
                     b.Property<DateTime?>("DataCriacao")
                         .HasColumnType("datetime");
@@ -80,6 +80,9 @@ namespace acme.estudoemvideo.infra.Migrations
 
                     b.Property<DateTime?>("DataModificacao")
                         .HasColumnType("datetime");
+
+                    b.Property<int>("Dia")
+                        .HasColumnType("int");
 
                     b.Property<bool>("DiaLetivo")
                         .HasColumnType("tinyint(1)")
@@ -101,6 +104,12 @@ namespace acme.estudoemvideo.infra.Migrations
                         .HasColumnType("tinyint(1)")
                         .HasDefaultValue(false);
 
+                    b.Property<bool>("FeriadoFixo")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<int>("Mes")
+                        .HasColumnType("int");
+
                     b.Property<int>("Status")
                         .HasColumnType("int")
                         .HasDefaultValue(0);
@@ -108,6 +117,42 @@ namespace acme.estudoemvideo.infra.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("AnoLetivo");
+                });
+
+            modelBuilder.Entity("acme.estudoemvideo.domain.DTO.Diary.Diario", b =>
+                {
+                    b.Property<byte[]>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("varbinary(16)");
+
+                    b.Property<byte[]>("AnoLetivoId")
+                        .IsRequired()
+                        .HasColumnType("varbinary(16)");
+
+                    b.Property<DateTime?>("DataCriacao")
+                        .HasColumnType("datetime");
+
+                    b.Property<DateTime?>("DataInativacao")
+                        .HasColumnType("datetime");
+
+                    b.Property<DateTime?>("DataModificacao")
+                        .HasColumnType("datetime");
+
+                    b.Property<bool>("Falta")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<bool>("Presenca")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AnoLetivoId");
+
+                    b.ToTable("Diario");
                 });
 
             modelBuilder.Entity("acme.estudoemvideo.domain.DTO.Diary.MateriaAgenda", b =>
@@ -444,7 +489,7 @@ namespace acme.estudoemvideo.infra.Migrations
 
                     b.Property<DateTime>("DataAlunoEscola")
                         .HasColumnType("datetime")
-                        .HasDefaultValue(new DateTime(2021, 8, 27, 8, 59, 42, 902, DateTimeKind.Local).AddTicks(3804));
+                        .HasDefaultValue(new DateTime(2021, 9, 15, 21, 39, 41, 759, DateTimeKind.Local).AddTicks(5031));
 
                     b.Property<DateTime?>("DataCriacao")
                         .HasColumnType("datetime");
@@ -1049,6 +1094,42 @@ namespace acme.estudoemvideo.infra.Migrations
                     b.ToTable("Turma");
                 });
 
+            modelBuilder.Entity("acme.estudoemvideo.domain.DTO.School.Util.AlunoEscolaDiario", b =>
+                {
+                    b.Property<byte[]>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("varbinary(16)");
+
+                    b.Property<byte[]>("AlunoEscolaId")
+                        .IsRequired()
+                        .HasColumnType("varbinary(16)");
+
+                    b.Property<DateTime?>("DataCriacao")
+                        .HasColumnType("datetime");
+
+                    b.Property<DateTime?>("DataInativacao")
+                        .HasColumnType("datetime");
+
+                    b.Property<DateTime?>("DataModificacao")
+                        .HasColumnType("datetime");
+
+                    b.Property<byte[]>("DiarioId")
+                        .IsRequired()
+                        .HasColumnType("varbinary(16)");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AlunoEscolaId");
+
+                    b.HasIndex("DiarioId");
+
+                    b.ToTable("AlunoEscolaDiario");
+                });
+
             modelBuilder.Entity("acme.estudoemvideo.domain.DTO.School.Util.Bimestre", b =>
                 {
                     b.Property<byte[]>("Id")
@@ -1075,6 +1156,57 @@ namespace acme.estudoemvideo.infra.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Bimestre");
+                });
+
+            modelBuilder.Entity("acme.estudoemvideo.domain.DTO.School.Util.Boletim", b =>
+                {
+                    b.Property<byte[]>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("varbinary(16)");
+
+                    b.Property<byte[]>("AlunoEscolaId")
+                        .IsRequired()
+                        .HasColumnType("varbinary(16)");
+
+                    b.Property<DateTime?>("DataCriacao")
+                        .HasColumnType("datetime");
+
+                    b.Property<DateTime?>("DataInativacao")
+                        .HasColumnType("datetime");
+
+                    b.Property<DateTime?>("DataModificacao")
+                        .HasColumnType("datetime");
+
+                    b.Property<byte[]>("MateriaId")
+                        .IsRequired()
+                        .HasColumnType("varbinary(16)");
+
+                    b.Property<byte[]>("NotaAlunoMateriaProfessorId")
+                        .IsRequired()
+                        .HasColumnType("varbinary(16)");
+
+                    b.Property<byte[]>("ProfessorEscolaId")
+                        .IsRequired()
+                        .HasColumnType("varbinary(16)");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
+
+                    b.Property<int>("TotalFaltas")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AlunoEscolaId");
+
+                    b.HasIndex("MateriaId");
+
+                    b.HasIndex("NotaAlunoMateriaProfessorId");
+
+                    b.HasIndex("ProfessorEscolaId");
+
+                    b.ToTable("Boletim");
                 });
 
             modelBuilder.Entity("acme.estudoemvideo.domain.DTO.School.Util.EnderecoEscola", b =>
@@ -1212,6 +1344,42 @@ namespace acme.estudoemvideo.infra.Migrations
                     b.HasIndex("ProfessorEscolaId");
 
                     b.ToTable("MateriaProfessorEscola");
+                });
+
+            modelBuilder.Entity("acme.estudoemvideo.domain.DTO.School.Util.ProfessorEscolaDiario", b =>
+                {
+                    b.Property<byte[]>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("varbinary(16)");
+
+                    b.Property<DateTime?>("DataCriacao")
+                        .HasColumnType("datetime");
+
+                    b.Property<DateTime?>("DataInativacao")
+                        .HasColumnType("datetime");
+
+                    b.Property<DateTime?>("DataModificacao")
+                        .HasColumnType("datetime");
+
+                    b.Property<byte[]>("DiarioId")
+                        .IsRequired()
+                        .HasColumnType("varbinary(16)");
+
+                    b.Property<byte[]>("ProfessorEscolaId")
+                        .IsRequired()
+                        .HasColumnType("varbinary(16)");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DiarioId");
+
+                    b.HasIndex("ProfessorEscolaId");
+
+                    b.ToTable("ProfessorEscolaDiario");
                 });
 
             modelBuilder.Entity("acme.estudoemvideo.domain.DTO.School.Util.Serie", b =>
@@ -1951,6 +2119,17 @@ namespace acme.estudoemvideo.infra.Migrations
                     b.Navigation("Usuario");
                 });
 
+            modelBuilder.Entity("acme.estudoemvideo.domain.DTO.Diary.Diario", b =>
+                {
+                    b.HasOne("acme.estudoemvideo.domain.DTO.Diary.AnoLetivo", "AnoLetivo")
+                        .WithMany("Diarios")
+                        .HasForeignKey("AnoLetivoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AnoLetivo");
+                });
+
             modelBuilder.Entity("acme.estudoemvideo.domain.DTO.Diary.MateriaAgenda", b =>
                 {
                     b.HasOne("acme.estudoemvideo.domain.DTO.Diary.Agenda", "Agenda")
@@ -2054,15 +2233,15 @@ namespace acme.estudoemvideo.infra.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("acme.estudoemvideo.domain.DTO.User.Usuario", "Aluno")
+                    b.HasOne("acme.estudoemvideo.domain.DTO.User.Usuario", "Usuario")
                         .WithMany("AlunosEscolas")
                         .HasForeignKey("UsuarioId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Aluno");
-
                     b.Navigation("Escola");
+
+                    b.Navigation("Usuario");
                 });
 
             modelBuilder.Entity("acme.estudoemvideo.domain.DTO.School.Matter.Books.Apostila", b =>
@@ -2271,6 +2450,60 @@ namespace acme.estudoemvideo.infra.Migrations
                     b.Navigation("Serie");
                 });
 
+            modelBuilder.Entity("acme.estudoemvideo.domain.DTO.School.Util.AlunoEscolaDiario", b =>
+                {
+                    b.HasOne("acme.estudoemvideo.domain.DTO.School.AlunoEscola", "AlunoEscola")
+                        .WithMany("AlunoEscolasDiarios")
+                        .HasForeignKey("AlunoEscolaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("acme.estudoemvideo.domain.DTO.Diary.Diario", "Diario")
+                        .WithMany("AlunoEscolasDiarios")
+                        .HasForeignKey("DiarioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AlunoEscola");
+
+                    b.Navigation("Diario");
+                });
+
+            modelBuilder.Entity("acme.estudoemvideo.domain.DTO.School.Util.Boletim", b =>
+                {
+                    b.HasOne("acme.estudoemvideo.domain.DTO.School.AlunoEscola", "AlunoEscola")
+                        .WithMany("Boletins")
+                        .HasForeignKey("AlunoEscolaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("acme.estudoemvideo.domain.DTO.School.Matter.Materia", "Materia")
+                        .WithMany("Boletins")
+                        .HasForeignKey("MateriaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("acme.estudoemvideo.domain.DTO.School.Notes.NotaAlunoMateriaProfessor", "NotaAlunoMateriaProfessor")
+                        .WithMany("Boletins")
+                        .HasForeignKey("NotaAlunoMateriaProfessorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("acme.estudoemvideo.domain.DTO.School.ProfessorEscola", "ProfessorEscola")
+                        .WithMany("Boletins")
+                        .HasForeignKey("ProfessorEscolaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AlunoEscola");
+
+                    b.Navigation("Materia");
+
+                    b.Navigation("NotaAlunoMateriaProfessor");
+
+                    b.Navigation("ProfessorEscola");
+                });
+
             modelBuilder.Entity("acme.estudoemvideo.domain.DTO.School.Util.EnderecoEscola", b =>
                 {
                     b.HasOne("acme.estudoemvideo.domain.DTO.Util.Endereco", "Endereco")
@@ -2332,6 +2565,25 @@ namespace acme.estudoemvideo.infra.Migrations
                         .IsRequired();
 
                     b.Navigation("Materia");
+
+                    b.Navigation("ProfessorEscola");
+                });
+
+            modelBuilder.Entity("acme.estudoemvideo.domain.DTO.School.Util.ProfessorEscolaDiario", b =>
+                {
+                    b.HasOne("acme.estudoemvideo.domain.DTO.Diary.Diario", "Diario")
+                        .WithMany("ProfessoresEscolassDiarios")
+                        .HasForeignKey("DiarioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("acme.estudoemvideo.domain.DTO.School.ProfessorEscola", "ProfessorEscola")
+                        .WithMany("ProfessoresEscolassDiarios")
+                        .HasForeignKey("ProfessorEscolaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Diario");
 
                     b.Navigation("ProfessorEscola");
                 });
@@ -2499,6 +2751,15 @@ namespace acme.estudoemvideo.infra.Migrations
             modelBuilder.Entity("acme.estudoemvideo.domain.DTO.Diary.AnoLetivo", b =>
                 {
                     b.Navigation("Agendas");
+
+                    b.Navigation("Diarios");
+                });
+
+            modelBuilder.Entity("acme.estudoemvideo.domain.DTO.Diary.Diario", b =>
+                {
+                    b.Navigation("AlunoEscolasDiarios");
+
+                    b.Navigation("ProfessoresEscolassDiarios");
                 });
 
             modelBuilder.Entity("acme.estudoemvideo.domain.DTO.Movie.MovieList", b =>
@@ -2524,6 +2785,10 @@ namespace acme.estudoemvideo.infra.Migrations
 
             modelBuilder.Entity("acme.estudoemvideo.domain.DTO.School.AlunoEscola", b =>
                 {
+                    b.Navigation("AlunoEscolasDiarios");
+
+                    b.Navigation("Boletins");
+
                     b.Navigation("FrequenciasAlunosMaterias");
 
                     b.Navigation("NotasAlunosMateriasProfessores");
@@ -2555,6 +2820,8 @@ namespace acme.estudoemvideo.infra.Migrations
 
             modelBuilder.Entity("acme.estudoemvideo.domain.DTO.School.Matter.Materia", b =>
                 {
+                    b.Navigation("Boletins");
+
                     b.Navigation("ConteudosMaterias");
 
                     b.Navigation("FrequenciasAlunosMaterias");
@@ -2575,14 +2842,20 @@ namespace acme.estudoemvideo.infra.Migrations
 
             modelBuilder.Entity("acme.estudoemvideo.domain.DTO.School.Notes.NotaAlunoMateriaProfessor", b =>
                 {
+                    b.Navigation("Boletins");
+
                     b.Navigation("NotaAlunoMateriaConteudos");
                 });
 
             modelBuilder.Entity("acme.estudoemvideo.domain.DTO.School.ProfessorEscola", b =>
                 {
+                    b.Navigation("Boletins");
+
                     b.Navigation("MateriasProfessores");
 
                     b.Navigation("NotasAlunosMateriasProfessores");
+
+                    b.Navigation("ProfessoresEscolassDiarios");
 
                     b.Navigation("TurmaProfessorEscolas");
                 });

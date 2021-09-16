@@ -65,7 +65,7 @@
             <th>
                 @if (botao == "botaoEditarDeletarVisualizar")
                 {
-                    @Html.DisplayNameFor(model => model.BotaoEditarDeletarVizualizar)
+                    @Html.DisplayNameFor(model => model.BotaoEditarDeletarVisualizar)
                 }
                 else if (botao == "botaoEditarEDeletar")
                 {
@@ -119,7 +119,7 @@
                     @Html.ActionLink("Payer", "Player", new { id = item.Id }, new { @class = "btn btn-warning" })
                     @if (botao == "botaoEditarDeletarVisualizar")
                     {
-                        @Html.Raw(item.BotaoEditarDeletarVizualizar)
+                        @Html.Raw(item.BotaoEditarDeletarVisualizar)
                     }
                     else if (botao == "botaoEditarEDeletar")
                     {

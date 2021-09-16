@@ -38,12 +38,12 @@ namespace acme.estudoemvideo.util.ViewModel
         public EnumStatus Status { get; set; }
         [Display(Name = "Opções")]
         [NotMapped]
-        public virtual string BotaoEditarDeletarVizualizar {
+        public virtual string BotaoEditarDeletarVisualizar {
             get
             {
                 if (_camposTabela != null)
                 {
-                    _camposTabela.Add("{ data: 'botaoEditarDeletarVizualizar' }");
+                    _camposTabela.Add("{ data: 'botaoEditarDeletarVisualizar' }");
                 }
                 else
                     _camposTabela = new List<string>();

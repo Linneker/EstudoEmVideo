@@ -18,7 +18,7 @@ namespace acme.estudoemvideo.domain.DTO.School.Matter
             NotasAlunosMateriasProfessores = new HashSet<NotaAlunoMateriaProfessor>();
             TurmaMaterias = new HashSet<TurmaMateria>();
             MateriasProfessores = new HashSet<MateriaProfessorEscola>();
-
+            Boletins = new HashSet<Boletim>();
         }
         public string Nome { get; set; }
 
@@ -28,6 +28,6 @@ namespace acme.estudoemvideo.domain.DTO.School.Matter
         public virtual ICollection<NotaAlunoMateriaProfessor> NotasAlunosMateriasProfessores { get; set; }
         public virtual ICollection<TurmaMateria> TurmaMaterias { get; set; }
         public virtual ICollection<MateriaProfessorEscola> MateriasProfessores { get; set; }
-
+        public virtual ICollection<Boletim> Boletins { get; set; }
     }
 }

@@ -1,18 +1,27 @@
-﻿function loadgrid_materia() {
-    let url = ""
-    let idTable =""
-    let camposTabela [];
-    console.log(camposTabela);
-    var campos = montandoColuna(camposTabela);
+﻿function loadgrid_materia_23() {
+    let url = "/Materia/GetDadosTable";
+    let idTable = "tabela_materia";
     var columnsDef = montaColumnsDef();
     $(`#${idTable}`).DataTable({
         processing: true,
         ajax: url,
-        columns: camposTabela,
+        columns: [
+            { data: 'nome' },
+            { data: 'dataCriacao' },
+            {
+                data: 'status',
+                render: function (data, type) {
+                    if (data === 0) { return 'Ativo'; }
+                    if (data === 1) { return 'Inativo'; }
+                }
+            },
+            {
+                data: 'botaoEditarDeletarVisualizar'
+            }],
         language: language_padrao(),
-        // columnDefs: columnsDef,
+        columnDefs: columnsDef,
         ordering: true,
-        destroy: true,
+        destroy: false,
         stateSave: true,
         scrollCollapse: true,
         paging: true

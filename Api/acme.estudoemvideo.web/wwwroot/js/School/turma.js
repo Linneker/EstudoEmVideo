@@ -130,7 +130,7 @@ function exibirProfessorluno() {
                 });
             }
             for (var i = 0; i < h.$values.length; i++) {
-                $("#cad_turma_professor_escola").append(`<option value=${h.$values[i].id}>${h.$values[i].usuario.nome}</option>`);
+                $("#cad_turma_professor_escola").append(`<option value=${h.$values[i].Id}>${h.$values[i].Usuario.Nome}</option>`);
             }
             $("#div_turma_professor_escola").removeClass("visually-hidden");
         },
@@ -156,7 +156,7 @@ function exibirProfessorluno() {
             $("#cad_turma_alunos_escola").empty();
             $("#cad_turma_materia").empty();
             for (var i = 0; i < e.$values.length; i++) {
-                $("#cad_turma_alunos_escola").append(`<option value=${e.$values[i].id}>${e.$values[i].aluno.nome}</option>`);
+                $("#cad_turma_alunos_escola").append(`<option value=${e.$values[i].Id}>${e.$values[i].Aluno.Nome}</option>`);
             }
             $("#div_turma_aluno_escola").removeClass("visually-hidden");
         },
@@ -188,8 +188,8 @@ function exibirMateria() {
         dataType: 'json',
         success: function (e) {
             $("#cad_turma_materia").empty();
-            for (var i = 0; i < e.$values.length; i++) {
-                $("#cad_turma_materia").append(`<option value=${e.$values[i].id}>${e.$values[i].nome}</option>`);
+            for (var i = 0; i < e.length; i++) {
+                $("#cad_turma_materia").append(`<option value=${e[i].id}>${e[i].nome}</option>`);
             }
             $("#div_turma_materia_professor").removeClass("visually-hidden");
         },

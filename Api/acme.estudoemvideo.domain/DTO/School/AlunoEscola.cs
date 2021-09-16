@@ -16,7 +16,8 @@ namespace acme.estudoemvideo.domain.DTO.School
             FrequenciasAlunosMaterias = new HashSet<FrequenciaAlunoMateria>();
             NotasAlunosMateriasProfessores = new HashSet<NotaAlunoMateriaProfessor>();
             TurmasAlunosEscolas = new HashSet<TurmaAlunoEscola>();
-
+            AlunoEscolasDiarios = new HashSet<AlunoEscolaDiario>();
+            Boletins = new HashSet<Boletim>();
         }
         public DateTime DataAlunoEscola { get; set; }
         public DateTime DataMatriculaAlunoNaEscola { get; set; }
@@ -26,13 +27,15 @@ namespace acme.estudoemvideo.domain.DTO.School
         public Guid EscolaId { get; set; }
 
         [ForeignKey("UsuarioId")]
-        public virtual Usuario Aluno { get; set; }
+        public virtual Usuario Usuario { get; set; }
         [ForeignKey("EscolaId")]
         public virtual Escola Escola { get; set; }
 
         public virtual ICollection<FrequenciaAlunoMateria> FrequenciasAlunosMaterias { get; set; }
         public virtual ICollection<NotaAlunoMateriaProfessor> NotasAlunosMateriasProfessores { get; set; }
         public virtual ICollection<TurmaAlunoEscola> TurmasAlunosEscolas { get; set; }
+        public virtual ICollection<AlunoEscolaDiario> AlunoEscolasDiarios { get; set; }
+        public virtual ICollection<Boletim> Boletins { get; set; }
 
     }
 }

@@ -10,7 +10,7 @@
     string botao = "";
     if (update && delete && read)
     {
-        botao = "botaoEditarDeletarVizualizar";
+        botao = "botaoEditarDeletarVisualizar";
     }
     else if (update && delete)
     {
@@ -51,7 +51,7 @@
             <th>
                 @if (botao == "botaoEditarDeletarVisualizar")
                 {
-                    @Html.DisplayNameFor(model => model.BotaoEditarDeletarVizualizar)
+                    @Html.DisplayNameFor(model => model.BotaoEditarDeletarVisualizar)
                 }
                 else if (botao == "botaoEditarEDeletar")
                 {

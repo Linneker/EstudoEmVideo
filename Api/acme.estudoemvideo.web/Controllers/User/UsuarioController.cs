@@ -71,7 +71,7 @@ namespace acme.estudoemvideo.web.Controllers.User
             {
                 AlunoEscola alunoEscola = new AlunoEscola();
                 alunoEscola.EscolaId = Guid.Parse(escolaId);
-                alunoEscola.Aluno = usuario;
+                alunoEscola.Usuario = usuario;
                 respostaPadraoModels = _mapper.Map<RespostaPadraoModels>(_alunoEscolaApplication.Add(alunoEscola, "ALUNO"));
             }
             else if (permissao.Equals("Professor"))

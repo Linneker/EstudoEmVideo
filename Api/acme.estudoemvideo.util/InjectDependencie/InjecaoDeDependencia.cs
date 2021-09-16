@@ -3,6 +3,7 @@ using acme.estudoemvideo.aplication.Aplication.Movie;
 using acme.estudoemvideo.aplication.Aplication.Movie.Util;
 using acme.estudoemvideo.aplication.Aplication.School;
 using acme.estudoemvideo.aplication.Aplication.School.Matter;
+using acme.estudoemvideo.aplication.Aplication.School.Notes;
 using acme.estudoemvideo.aplication.Aplication.School.Util;
 using acme.estudoemvideo.aplication.Aplication.Seguranca.Site;
 using acme.estudoemvideo.aplication.Aplication.User;
@@ -12,6 +13,7 @@ using acme.estudoemvideo.aplication.Interfaces.Movie;
 using acme.estudoemvideo.aplication.Interfaces.Movie.Util;
 using acme.estudoemvideo.aplication.Interfaces.School;
 using acme.estudoemvideo.aplication.Interfaces.School.Matter;
+using acme.estudoemvideo.aplication.Interfaces.School.Notes;
 using acme.estudoemvideo.aplication.Interfaces.School.Util;
 using acme.estudoemvideo.aplication.Interfaces.Seguranca.Site;
 using acme.estudoemvideo.aplication.Interfaces.User;
@@ -22,6 +24,7 @@ using acme.estudoemvideo.domain.Interfaces.Repository.Movie;
 using acme.estudoemvideo.domain.Interfaces.Repository.Movie.Util;
 using acme.estudoemvideo.domain.Interfaces.Repository.School;
 using acme.estudoemvideo.domain.Interfaces.Repository.School.Matter;
+using acme.estudoemvideo.domain.Interfaces.Repository.School.Notes;
 using acme.estudoemvideo.domain.Interfaces.Repository.School.Util;
 using acme.estudoemvideo.domain.Interfaces.Repository.Seguranca;
 using acme.estudoemvideo.domain.Interfaces.Repository.Seguranca.Site;
@@ -32,6 +35,7 @@ using acme.estudoemvideo.domain.Interfaces.Services.Movie;
 using acme.estudoemvideo.domain.Interfaces.Services.Movie.Util;
 using acme.estudoemvideo.domain.Interfaces.Services.School;
 using acme.estudoemvideo.domain.Interfaces.Services.School.Matter;
+using acme.estudoemvideo.domain.Interfaces.Services.School.Notes;
 using acme.estudoemvideo.domain.Interfaces.Services.School.Util;
 using acme.estudoemvideo.domain.Interfaces.Services.Seguranca;
 using acme.estudoemvideo.domain.Interfaces.Services.Seguranca.Site;
@@ -42,6 +46,7 @@ using acme.estudoemvideo.domain.Services.Movie;
 using acme.estudoemvideo.domain.Services.Movie.Util;
 using acme.estudoemvideo.domain.Services.School;
 using acme.estudoemvideo.domain.Services.School.Matter;
+using acme.estudoemvideo.domain.Services.School.Notes;
 using acme.estudoemvideo.domain.Services.School.Util;
 using acme.estudoemvideo.domain.Services.Seguranca;
 using acme.estudoemvideo.domain.Services.Seguranca.Site;
@@ -52,6 +57,7 @@ using acme.estudoemvideo.infra.Repository.Movie;
 using acme.estudoemvideo.infra.Repository.Movie.Util;
 using acme.estudoemvideo.infra.Repository.School;
 using acme.estudoemvideo.infra.Repository.School.Matter;
+using acme.estudoemvideo.infra.Repository.School.Notes;
 using acme.estudoemvideo.infra.Repository.School.Util;
 using acme.estudoemvideo.infra.Repository.Seguranca;
 using acme.estudoemvideo.infra.Repository.Seguranca.Site;
@@ -111,6 +117,7 @@ namespace acme.estudoemvideo.util.InjectDependencie
             services.AddTransient<ITurmaRepository, TurmaRepository>();
             services.AddTransient<IMateriaRepository, MateriaRepository>();
             services.AddTransient<IConteudoRepository, ConteudoRepository>();
+            services.AddTransient<INotaRepository, NotaRepository>();
 
             services.AddTransient<IParametroRepository, ParametroRepository>();
             
@@ -152,6 +159,7 @@ namespace acme.estudoemvideo.util.InjectDependencie
             services.AddTransient<IEscolaServices, EscolaServices>();
             services.AddTransient<IMateriaServices, MateriaServices>();
             services.AddTransient<IConteudoServices, ConteudoServices>();
+            services.AddTransient<INotaServices, NotaServices>();
 
             services.AddTransient<IParametroServices, ParametroServices>();
 
@@ -186,6 +194,7 @@ namespace acme.estudoemvideo.util.InjectDependencie
             services.AddTransient<ITurmaApplication, TurmaApplication>();
             services.AddTransient<IMateriaApplication, MateriaApplication>();
             services.AddTransient<IConteudoApplication, ConteudoApplication>();
+            services.AddTransient<INotaApplication, NotaApplication>();
 
             services.AddTransient<ICategoriaAplication, CategoriaAplication>();
             services.AddTransient<ILogAplication<object>, LogAplication>();

@@ -1,0 +1,118 @@
+﻿@model IEnumerable<acme.estudoemvideo.util.ViewModel.School.Notes.NotaViewModel>
+
+@{
+    ViewData["Title"] = "Nota";
+    bool insert = bool.Parse(Context.User.Claims.Where(t => t.Type.Equals("Insert")).Select(t => t.Value).FirstOrDefault());
+    bool update = bool.Parse(Context.User.Claims.Where(t => t.Type.Equals("Update")).Select(t => t.Value).FirstOrDefault());
+    bool delete = bool.Parse(Context.User.Claims.Where(t => t.Type.Equals("Delete")).Select(t => t.Value).FirstOrDefault());
+    bool read = bool.Parse(Context.User.Claims.Where(t => t.Type.Equals("Read")).Select(t => t.Value).FirstOrDefault());
+
+    string botao = "";
+    if (update && delete && read)
+    {
+        botao = "botaoEditarDeletarVisualizar";
+    }
+    else if (update && delete)
+    {
+        botao = "botaoEditarEDeletar";
+    }
+    else if (update)
+    {
+        botao = "botaoEditar";
+    }
+    else if (delete)
+    {
+        botao = "botaoDeletar";
+    }
+    else if (read)
+    {
+        botao = "botaoVisualizar";
+    }
+}
+
+<h1>Nota</h1>
+
+<div>
+    <a class="btn btn-primary" onclick="open_modal('/Nota/Modal/ModalCadastroNota','GET','CADASTRO NOTA','md_layout','dv_modal_show_cad_layout')">Cadastrar</a>
+</div>
+<br/>
+<table class="table table-striped" id="tabela_nota">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Numero)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsAprovado)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsRecuperacao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsReprovado)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataCriacao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BotaoEditarDeletarVisualizar)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Numero)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsAprovado)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsRecuperacao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsReprovado)
+                </td>
+                <th>
+                    @Html.DisplayFor(modelItem => item.DataCriacao)
+                </th>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    @if (botao == "botaoEditarDeletarVisualizar")
+                    {
+                        @Html.Raw(item.BotaoEditarDeletarVisualizar)
+                    }
+                    else if (botao == "botaoEditarEDeletar")
+                    {
+                        @Html.Raw(item.BotaoEditarEDeletar)
+                    }
+                    else if (botao == "botaoEditar")
+                    {
+                        @Html.Raw(item.BotaoEditar)
+                    }
+                    else if (botao == "botaoDeletar")
+                    {
+                        @Html.Raw(item.BotaoDeletar)
+                    }
+                    else if (botao == "botaoVisualizar")
+                    {
+                        @Html.Raw(item.BotaoVizualizar)
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<script src="~/js/School/Notes/nota.js"></script>
+<script>
+    $(document).ready(function () {
+        loadgrid_padrao('/Nota/GetDadosTable', 'tabela_nota', [{ data: 'numero' }, { data: 'isAprovado', render: function (data, type) { if (data === true) { return 'Sim'; } if (data === false) { return 'Não'; } } }, { data: 'isRecuperacao', render: function (data, type) { if (data === true) { return 'Sim'; } if (data === false) { return 'Não';}}}, { data: 'isReprovado', render: function (data, type) { if (data === true) { return 'Sim'; } if (data === false) { return 'Não';}}},{ data: 'dataCriacao' }, {data: 'status',render: function (data, type) {if (data === 0) {return 'Ativo';}if (data === 1) {return 'Inativo';}}}, { data : '@botao' }]);
+    });
+</script>

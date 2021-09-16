@@ -1,12 +1,14 @@
 ﻿using acme.estudoemvideo.aplication.Interfaces.School;
 using acme.estudoemvideo.aplication.Interfaces.Util;
 using acme.estudoemvideo.domain.DTO.School;
+using acme.estudoemvideo.util.Util;
 using acme.estudoemvideo.util.ViewModel.School;
 using acme.estudoemvideo.util.ViewModel.Util;
 using acme.estudoemvideo.web.ViewModel;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -50,8 +52,15 @@ namespace acme.estudoemvideo.web.Controllers.School
 
         [Authorize]
         [HttpGet]
-        public Task<List<AlunoEscola>> GetAlunosEscolaByEscolaIdAsync(Guid escolaId) => _alunoEscolaApplication.GetAlunosEscolaByEscolaIdAsync(escolaId);
-            
+        public Task<string> GetAlunosEscolaByEscolaIdAsync(Guid escolaId)
+        {
+            Task<List<AlunoEscola>> elemento = _alunoEscolaApplication.GetAlunosEscolaByEscolaIdAsync(escolaId);
+            Task<string> alunosJsonString = JsonConvertEstudoEmVideo<List<AlunoEscola>>.SerializeAsync(elemento.Result);
+            //var alunos= JsonConvertEstudoEmVideo<List<AlunoEscola>>.DescerializeAsync(alunosJsonString);
 
+            return alunosJsonString;
+        }
+
+      
     }
 }

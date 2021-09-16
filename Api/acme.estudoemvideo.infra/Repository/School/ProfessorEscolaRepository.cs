@@ -27,7 +27,9 @@ namespace acme.estudoemvideo.infra.Repository.School
         {
             Task<List<ProfessorEscola>> professorEscolas = (from prfEscola in _db.ProfessorEscolas
                                                       where prfEscola.EscolaId.Equals(escolaId)
-                                                      select prfEscola).Include(t=>t.Usuario).ThenInclude(t=>t.Contas).ToListAsync();
+                                                      select prfEscola)
+                                                      .Include(t=>t.Usuario)
+                                                      .ThenInclude(t=>t.Contas).AsNoTracking().ToListAsync();
             return professorEscolas;
         }
     }

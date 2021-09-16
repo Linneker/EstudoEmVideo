@@ -16,6 +16,8 @@ namespace acme.estudoemvideo.domain.DTO.School
             NotasAlunosMateriasProfessores = new HashSet<NotaAlunoMateriaProfessor>();
             TurmaProfessorEscolas = new HashSet<TurmaProfessorEscola>();
             MateriasProfessores = new HashSet<MateriaProfessorEscola>();
+            ProfessoresEscolassDiarios = new HashSet<ProfessorEscolaDiario>();
+            Boletins = new HashSet<Boletim>();
         }
 
         public int PopularidadeProfessor { get; set; }
@@ -30,5 +32,7 @@ namespace acme.estudoemvideo.domain.DTO.School
         public virtual ICollection<NotaAlunoMateriaProfessor> NotasAlunosMateriasProfessores { get; set; }
         public virtual ICollection<TurmaProfessorEscola> TurmaProfessorEscolas { get; set; }
         public virtual ICollection<MateriaProfessorEscola> MateriasProfessores { get; set; }
+        public virtual ICollection<ProfessorEscolaDiario> ProfessoresEscolassDiarios { get; set; }
+        public virtual ICollection<Boletim> Boletins { get; set; }
     }
 }

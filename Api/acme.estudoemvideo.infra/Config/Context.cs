@@ -75,6 +75,7 @@ namespace acme.estudoemvideo.infra.Config
         public DbSet<Agenda> Agendas { get; set; }
         public DbSet<AnoLetivo> AnoLetivos { get; set; }
         public DbSet<MateriaAgenda> MateriaAgendas { get; set; }
+        public DbSet<Diario> Diarios { get; set; }
 
         public DbSet<Apostila> Apostilas { get; set; }
         public DbSet<Livro> Livros { get; set; }
@@ -93,6 +94,7 @@ namespace acme.estudoemvideo.infra.Config
         public DbSet<Resposta> Respostas { get; set; }
 
         public DbSet<Bimestre> Bimestres { get; set; }
+        public DbSet<Boletim> Boletins { get; set; }
         public DbSet<FrequenciaAlunoMateria> FrequenciaAlunoMaterias { get; set; }
         public DbSet<Serie> Series { get; set; }
         public DbSet<TurmaAlunoEscola> TurmaAlunoEscolas { get; set; }
@@ -100,6 +102,8 @@ namespace acme.estudoemvideo.infra.Config
         public DbSet<TurmaBimestre> TurmaBimestres { get; set; }
         public DbSet<TurmaProfessorEscola> TurmaProfessoresEscolas { get; set; }
         public DbSet<MateriaProfessorEscola> MateriaProfessorEscolas { get; set; }
+        public DbSet<AlunoEscolaDiario> AlunosEscolasDiarios { get; set; }
+        public DbSet<ProfessorEscolaDiario> ProfessorEscolaDiarios { get; set; }
 
         public DbSet<Endereco> Enderecos { get; set; }
         public DbSet<EnderecoUsuario> EnderecoUsuarios { get; set; }
@@ -111,6 +115,7 @@ namespace acme.estudoemvideo.infra.Config
             modelBuilder = PreencheMapDiary(modelBuilder);
             modelBuilder = PreencheMapSchool(modelBuilder);
             modelBuilder = PreencheMapUtil(modelBuilder);
+            
 
             modelBuilder.ApplyConfiguration<CategoriaVideo>(new CategoriaVideoMap());
             modelBuilder.ApplyConfiguration<MovieList>(new MovieListMap());
@@ -167,6 +172,10 @@ namespace acme.estudoemvideo.infra.Config
             modelBuilder.ApplyConfiguration(new MateriaProfessorEscolaMap());
             modelBuilder.ApplyConfiguration(new EnderecoEscolaMap());
             modelBuilder.ApplyConfiguration(new TurmaBimestreMap());
+            modelBuilder.ApplyConfiguration(new BoletimMap());
+            modelBuilder.ApplyConfiguration(new AlunoEscolaDiarioMap());
+            modelBuilder.ApplyConfiguration(new ProfessorEscolaDiarioMap());
+
             return modelBuilder;
         }
 
@@ -210,6 +219,7 @@ namespace acme.estudoemvideo.infra.Config
             modelBuilder.ApplyConfiguration(new AgendaMap());
             modelBuilder.ApplyConfiguration(new AnoLetivoMap());
             modelBuilder.ApplyConfiguration(new MateriaAgendaMap());
+            modelBuilder.ApplyConfiguration(new DiarioMap());
 
             return modelBuilder;
         }

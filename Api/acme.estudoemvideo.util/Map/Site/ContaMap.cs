@@ -29,7 +29,7 @@ namespace acme.estudoemvideo.util.Map.Site
                 AlterarSenha = conta.AlterarSenha,
                 BotaoDeletar = conta.BotaoDeletar,
                 BotaoEditar = conta.BotaoEditar,
-                BotaoEditarDeletarVizualizar = conta.BotaoEditarDeletarVizualizar,
+                BotaoEditarDeletarVisualizar = conta.BotaoEditarDeletarVisualizar,
                 BotaoEditarEDeletar = conta.BotaoEditarEDeletar,
                 BotaoVizualizar = conta.BotaoVizualizar,
                 ContaAtiva = conta.ContaAtiva,
@@ -49,7 +49,7 @@ namespace acme.estudoemvideo.util.Map.Site
                 contaViewModel.Usuario = new UsuarioViewModel();
                 contaViewModel.Usuario.BotaoDeletar = conta.Usuario.BotaoDeletar;
                 contaViewModel.Usuario.BotaoEditar = conta.Usuario.BotaoEditar;
-                contaViewModel.Usuario.BotaoEditarDeletarVizualizar = conta.Usuario.BotaoEditarDeletarVizualizar;
+                contaViewModel.Usuario.BotaoEditarDeletarVisualizar = conta.Usuario.BotaoEditarDeletarVisualizar;
                 contaViewModel.Usuario.BotaoEditarEDeletar = conta.Usuario.BotaoEditarEDeletar;
                 contaViewModel.Usuario.BotaoVizualizar = conta.Usuario.BotaoVizualizar;
                 contaViewModel.Usuario.Cpf = conta.Usuario.Cpf;

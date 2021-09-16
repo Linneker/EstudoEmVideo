@@ -1,6 +1,7 @@
 ﻿using acme.estudoemvideo.aplication.Interfaces.School;
 using acme.estudoemvideo.aplication.Interfaces.Util;
 using acme.estudoemvideo.domain.DTO.School;
+using acme.estudoemvideo.util.Util;
 using acme.estudoemvideo.util.ViewModel.School;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
@@ -40,9 +41,13 @@ namespace acme.estudoemvideo.web.Controllers.School
         //}
         [Authorize]
         [HttpGet]
-        public Task<List<ProfessorEscola>> GetProfessorEscolaByEscolaIdAsync(Guid escolaId)
+        public Task<string> GetProfessorEscolaByEscolaIdAsync(Guid escolaId)
         {
-            return (_professorEscolaApplication.GetProfessorEscolaByEscolaIdAsync(escolaId));
+            var elemento = (_professorEscolaApplication.GetProfessorEscolaByEscolaIdAsync(escolaId));
+            var profesorresJsonString = JsonConvertEstudoEmVideo<List<ProfessorEscola>>.SerializeAsync(elemento.Result);
+           //var profesorres = JsonConvertEstudoEmVideo<List<ProfessorEscola>>.DescerializeAsync(alunosJsonString);
+
+            return profesorresJsonString;
         }
 
     }

@@ -98,7 +98,7 @@ namespace acme.estudoemvideo.web
                 t.Cookie.HttpOnly = true;
             });
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-            services.AddControllersWithViews().AddJsonOptions(x=> x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);
+            //services.AddControllersWithViews().AddJsonOptions(x=> x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);
             services.AddMvcCore();
         }
 

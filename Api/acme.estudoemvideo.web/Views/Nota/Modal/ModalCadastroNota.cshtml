@@ -1,0 +1,70 @@
+﻿@model acme.estudoemvideo.util.ViewModel.School.Notes.NotaViewModel
+
+@{
+    ViewData["Title"] = "Cadastro de Nota";
+    bool insert = bool.Parse(Context.User.Claims.Where(t => t.Type.Equals("Insert")).Select(t => t.Value).FirstOrDefault());
+    bool update = bool.Parse(Context.User.Claims.Where(t => t.Type.Equals("Update")).Select(t => t.Value).FirstOrDefault());
+    bool delete = bool.Parse(Context.User.Claims.Where(t => t.Type.Equals("Delete")).Select(t => t.Value).FirstOrDefault());
+    bool read = bool.Parse(Context.User.Claims.Where(t => t.Type.Equals("Read")).Select(t => t.Value).FirstOrDefault());
+
+    string botao = "";
+    if (update && delete && read)
+    {
+        botao = "botaoEditarDeletarVisualizar";
+    }
+    else if (update && delete)
+    {
+        botao = "botaoEditarEDeletar";
+    }
+    else if (update)
+    {
+        botao = "botaoEditar";
+    }
+    else if (delete)
+    {
+        botao = "botaoDeletar";
+    }
+    else if (read)
+    {
+        botao = "botaoVisualizar";
+    }
+    Layout = null;
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <form action="/Nota/Cadastro" onsubmit="submit_default(this,'Cadastrado','POST','dv_modal_show_cad_layout','Nota','/Nota/GetDadosTable', 'tabela_nota',[{ data: 'numero' }, { data: 'isAprovado' },{ data: 'isRecuperacao' },{ data: 'isReprovado' },{ data: 'dataCriacao' }, {data: 'status',render: function (data, type) {if (data === 0) {return 'Ativo';}if (data === 1) {return 'Inativo';}}}, { data : '@botao' }]); return false;">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Numero" class="control-label"></label>
+                <input asp-for="Numero" class="form-control" />
+                <span asp-validation-for="Numero" class="text-danger"></span>
+            </div>
+            <div class="form-group d-flex justify-content-center">
+                <div class="form-check form-switch">
+                    <input id="permissao_valida_usuario" type="checkbox" asp-for="IsAprovado" class="form-check-input" />
+                    <label class="form-check-label" for="permissao_valida_usuario">Aprovado</label>
+                    <span asp-validation-for="IsAprovado" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group d-flex justify-content-center">
+                <div class="form-check form-switch">
+                    <input id="permissao_valida_usuario" type="checkbox" asp-for="IsRecuperacao" class="form-check-input" />
+                    <label class="form-check-label" for="permissao_valida_usuario">Recuperação</label>
+                    <span asp-validation-for="IsRecuperacao" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group d-flex justify-content-center">
+                <div class="form-check form-switch">
+                    <input id="permissao_valida_usuario" type="checkbox" asp-for="IsReprovado" class="form-check-input" />
+                    <label class="form-check-label" for="permissao_valida_usuario">Reprovado</label>
+                    <span asp-validation-for="IsReprovado" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Cadastrar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
