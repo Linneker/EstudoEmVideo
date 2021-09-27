@@ -1,4 +1,5 @@
 ﻿using acme.estudoemvideo.aplication.Aplication;
+using acme.estudoemvideo.aplication.Aplication.Diary;
 using acme.estudoemvideo.aplication.Aplication.Movie;
 using acme.estudoemvideo.aplication.Aplication.Movie.Util;
 using acme.estudoemvideo.aplication.Aplication.School;
@@ -9,6 +10,7 @@ using acme.estudoemvideo.aplication.Aplication.Seguranca.Site;
 using acme.estudoemvideo.aplication.Aplication.User;
 using acme.estudoemvideo.aplication.Aplication.Util;
 using acme.estudoemvideo.aplication.Interfaces;
+using acme.estudoemvideo.aplication.Interfaces.Diary;
 using acme.estudoemvideo.aplication.Interfaces.Movie;
 using acme.estudoemvideo.aplication.Interfaces.Movie.Util;
 using acme.estudoemvideo.aplication.Interfaces.School;
@@ -20,6 +22,7 @@ using acme.estudoemvideo.aplication.Interfaces.User;
 using acme.estudoemvideo.aplication.Interfaces.Util;
 using acme.estudoemvideo.domain.DTO;
 using acme.estudoemvideo.domain.Interfaces.Repository;
+using acme.estudoemvideo.domain.Interfaces.Repository.Diary;
 using acme.estudoemvideo.domain.Interfaces.Repository.Movie;
 using acme.estudoemvideo.domain.Interfaces.Repository.Movie.Util;
 using acme.estudoemvideo.domain.Interfaces.Repository.School;
@@ -31,6 +34,7 @@ using acme.estudoemvideo.domain.Interfaces.Repository.Seguranca.Site;
 using acme.estudoemvideo.domain.Interfaces.Repository.User;
 using acme.estudoemvideo.domain.Interfaces.Repository.Util;
 using acme.estudoemvideo.domain.Interfaces.Services;
+using acme.estudoemvideo.domain.Interfaces.Services.Diary;
 using acme.estudoemvideo.domain.Interfaces.Services.Movie;
 using acme.estudoemvideo.domain.Interfaces.Services.Movie.Util;
 using acme.estudoemvideo.domain.Interfaces.Services.School;
@@ -42,6 +46,7 @@ using acme.estudoemvideo.domain.Interfaces.Services.Seguranca.Site;
 using acme.estudoemvideo.domain.Interfaces.Services.User;
 using acme.estudoemvideo.domain.Interfaces.Services.Util;
 using acme.estudoemvideo.domain.Services;
+using acme.estudoemvideo.domain.Services.Diary;
 using acme.estudoemvideo.domain.Services.Movie;
 using acme.estudoemvideo.domain.Services.Movie.Util;
 using acme.estudoemvideo.domain.Services.School;
@@ -53,6 +58,7 @@ using acme.estudoemvideo.domain.Services.Seguranca.Site;
 using acme.estudoemvideo.domain.Services.User;
 using acme.estudoemvideo.domain.Services.Util;
 using acme.estudoemvideo.infra.Repository;
+using acme.estudoemvideo.infra.Repository.Diary;
 using acme.estudoemvideo.infra.Repository.Movie;
 using acme.estudoemvideo.infra.Repository.Movie.Util;
 using acme.estudoemvideo.infra.Repository.School;
@@ -88,6 +94,11 @@ namespace acme.estudoemvideo.util.InjectDependencie
             //Repository
             services.AddTransient<IRepositoryBase<AbstractEntity>, RepositoryBase<AbstractEntity>>();
 
+            services.AddTransient<IAgendaRepository, AgendaRepository>();
+            services.AddTransient<IAnoLetivoRepository, AnoLetivoRepository>();
+            services.AddTransient<IDiarioRepository, DiarioRepository>();
+            services.AddTransient<IMateriaAgendaRepository, MateriaAgendaRepository>();
+
             services.AddTransient<IMovieListRepository, MovieListRepository>();
             services.AddTransient<IMovieListUsuarioRepository, MovieListUsuarioRepository>();
             services.AddTransient<IVideoMovieListRepository, VideoMovieListRepository>();
@@ -118,6 +129,9 @@ namespace acme.estudoemvideo.util.InjectDependencie
             services.AddTransient<IMateriaRepository, MateriaRepository>();
             services.AddTransient<IConteudoRepository, ConteudoRepository>();
             services.AddTransient<INotaRepository, NotaRepository>();
+            services.AddTransient<IBoletimRepository, BoletimRepository>();
+            services.AddTransient<INotaAlunoMateriaConteudoRepository, NotaAlunoMateriaConteudoRepository>();
+            services.AddTransient<INotaAlunoMateriaProfessorRepository, NotaAlunoMateriaProfessorRepository>();
 
             services.AddTransient<IParametroRepository, ParametroRepository>();
             
@@ -128,6 +142,11 @@ namespace acme.estudoemvideo.util.InjectDependencie
         {
             //Services
             services.AddTransient<IServicesBase<AbstractEntity>, ServiceBase<AbstractEntity>>();
+            
+            services.AddTransient<IAgendaServices, AgendaServices>();
+            services.AddTransient<IAnoLetivoServices, AnoLetivoServices>();
+            services.AddTransient<IDiarioServices, DiarioServices>();
+            services.AddTransient<IMateriaAgendaServices, MateriaAgendaServices>();
 
             services.AddTransient<IMovieListServices, MovieListServices>();
             services.AddTransient<IMovieListUsuarioServices, MovieListUsuarioServices>();
@@ -160,6 +179,9 @@ namespace acme.estudoemvideo.util.InjectDependencie
             services.AddTransient<IMateriaServices, MateriaServices>();
             services.AddTransient<IConteudoServices, ConteudoServices>();
             services.AddTransient<INotaServices, NotaServices>();
+            services.AddTransient<IBoletimServices, BoletimServices>();
+            services.AddTransient<INotaAlunoMateriaConteudoServices, NotaAlunoMateriaConteudoServices>();
+            services.AddTransient<INotaAlunoMateriaProfessorServices, NotaAlunoMateriaProfessorServices>();
 
             services.AddTransient<IParametroServices, ParametroServices>();
 
@@ -171,6 +193,11 @@ namespace acme.estudoemvideo.util.InjectDependencie
         {
             //Aplication
             services.AddTransient<IApplicationBase<AbstractEntity>, ApplicationBase<AbstractEntity>>();
+
+            services.AddTransient<IAgendaApplication, AgendaApplication>();
+            services.AddTransient<IAnoLetivoApplication, AnoLetivoApplication>();
+            services.AddTransient<IDiarioApplication, DiarioApplication>();
+            services.AddTransient<IMateriaAgendaApplication, MateriaAgendaApplication>();
 
             services.AddTransient<IMovieListAplication, MovieListAplication>();
             services.AddTransient<IMovieListUsuarioAplication, MovieListUsuarioAplication>();
@@ -195,6 +222,9 @@ namespace acme.estudoemvideo.util.InjectDependencie
             services.AddTransient<IMateriaApplication, MateriaApplication>();
             services.AddTransient<IConteudoApplication, ConteudoApplication>();
             services.AddTransient<INotaApplication, NotaApplication>();
+            services.AddTransient<IBoletimApplication, BoletimApplication>();
+            services.AddTransient<INotaAlunoMateriaConteudoApplication, NotaAlunoMateriaConteudoApplication>();
+            services.AddTransient<INotaAlunoMateriaProfessorApplication, NotaAlunoMateriaProfessorApplication>();
 
             services.AddTransient<ICategoriaAplication, CategoriaAplication>();
             services.AddTransient<ILogAplication<object>, LogAplication>();

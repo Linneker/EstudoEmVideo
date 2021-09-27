@@ -21,9 +21,6 @@ namespace acme.estudoemvideo.infra.Map.Diary
             builder.Property(t => t.DataInativacao).IsRequired(false);
             builder.Property(t => t.Status).HasDefaultValue(EnumStatus.Ativo);
 
-            builder.Property(t => t.Falta);
-            builder.Property(t => t.Presenca);
-
             builder.HasOne(t => t.AnoLetivo).WithMany(t => t.Diarios).HasForeignKey(t => t.AnoLetivoId);
         }
     }

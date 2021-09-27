@@ -13,8 +13,6 @@ namespace acme.estudoemvideo.domain.DTO.Diary
             ProfessoresEscolassDiarios = new HashSet<ProfessorEscolaDiario>();
         }
         public Guid AnoLetivoId { get; set; }
-        public bool Falta { get; set; }
-        public bool Presenca { get; set; }
         
         public virtual AnoLetivo AnoLetivo { get; set; }
         public virtual ICollection<AlunoEscolaDiario> AlunoEscolasDiarios { get; set; }

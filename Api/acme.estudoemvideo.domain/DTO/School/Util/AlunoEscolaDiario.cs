@@ -9,6 +9,8 @@ namespace acme.estudoemvideo.domain.DTO.School.Util
     {
         public Guid AlunoEscolaId { get; set; }
         public Guid DiarioId { get; set; }
+        public bool Falta { get; set; }
+        public bool Presenca { get; set; }
 
         public virtual AlunoEscola AlunoEscola { get; set; }
         public virtual Diario Diario { get; set; }

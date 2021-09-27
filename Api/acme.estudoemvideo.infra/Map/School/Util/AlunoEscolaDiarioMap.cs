@@ -20,7 +20,11 @@ namespace acme.estudoemvideo.infra.Map.School.Util
             builder.Property(t => t.DataInativacao).IsRequired(false);
             builder.Property(t => t.Status).HasDefaultValue(EnumStatus.Ativo);
 
+            builder.Property(t => t.Falta);
+            builder.Property(t => t.Presenca);
             builder.HasOne(t => t.AlunoEscola).WithMany(T => T.AlunoEscolasDiarios).HasForeignKey(t => t.AlunoEscolaId);
+            builder.HasOne(t => t.Diario).WithMany(T => T.AlunoEscolasDiarios).HasForeignKey(t => t.DiarioId);
+
         }
     }
 }
