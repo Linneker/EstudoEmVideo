@@ -17,6 +17,6 @@ namespace acme.estudoemvideo.domain.DTO.Enum
         MAXLENGTH = 100,
         MINLENGTH = 150,
         INFORMACAO_INVALIDA = 500,
-        SUCESSO = 200,
+        SUCESSO = 200
     }
 }

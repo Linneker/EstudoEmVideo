@@ -1,0 +1,143 @@
+﻿@model IEnumerable<acme.estudoemvideo.util.ViewModel.Diary.AnoLetivoViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+    bool insert = bool.Parse(Context.User.Claims.Where(t => t.Type.Equals("Insert")).Select(t => t.Value).FirstOrDefault());
+    bool update = bool.Parse(Context.User.Claims.Where(t => t.Type.Equals("Update")).Select(t => t.Value).FirstOrDefault());
+    bool delete = bool.Parse(Context.User.Claims.Where(t => t.Type.Equals("Delete")).Select(t => t.Value).FirstOrDefault());
+    bool read = bool.Parse(Context.User.Claims.Where(t => t.Type.Equals("Read")).Select(t => t.Value).FirstOrDefault());
+
+    string botao = "";
+    if (update && delete && read)
+    {
+        botao = "botaoEditarDeletarVisualizar";
+    }
+    else if (update && delete)
+    {
+        botao = "botaoEditarEDeletar";
+    }
+    else if (update)
+    {
+        botao = "botaoEditar";
+    }
+    else if (delete)
+    {
+        botao = "botaoDeletar";
+    }
+    else if (read)
+    {
+        botao = "botaoVisualizar";
+    }
+}
+
+<h1>Ano Letivo</h1>
+
+<div>
+    <a class="btn btn-primary" onclick="open_modal('Modal/ModalCadastroAnoLetivo','GET','CADASTRO ANO LETIVO','md_layout','dv_modal_show_cad_layout')">Cadastrar</a>
+</div>
+<br />
+<table class="table" id="tabela_ano_letivo">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Ano)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Dia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FeiradoNacional)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FeiradoEstadual)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FeiradoMunicipal)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FeiradoEscolar)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DiaLetivo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FeriadoFixo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BotaoEditarDeletarVisualizar)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ano)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Mes)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Dia)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FeiradoNacional)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FeiradoEstadual)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FeiradoMunicipal)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FeiradoEscolar)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DiaLetivo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FeriadoFixo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    @if (botao == "botaoEditarDeletarVisualizar")
+                    {
+                        @Html.Raw(item.BotaoEditarDeletarVisualizar)
+                    }
+                    else if (botao == "botaoEditarEDeletar")
+                    {
+                        @Html.Raw(item.BotaoEditarEDeletar)
+                    }
+                    else if (botao == "botaoEditar")
+                    {
+                        @Html.Raw(item.BotaoEditar)
+                    }
+                    else if (botao == "botaoDeletar")
+                    {
+                        @Html.Raw(item.BotaoDeletar)
+                    }
+                    else if (botao == "botaoVisualizar")
+                    {
+                        @Html.Raw(item.BotaoVizualizar)
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<script src="~/js/School/Matter/materia.js"></script>
+<script>
+    $(document).ready(function () {
+        loadgrid_padrao('/Materia/GetDadosTable', 'tabela_materia',[{ data: 'nome' }, { data: 'dataCriacao' }, {data: 'status',render: function (data, type) {if (data === 0) {return 'Ativo';}if (data === 1) {return 'Inativo';}}}, { data : '@botao' }]);
+        //loadgrid_materia_23()
+    });
+</script>

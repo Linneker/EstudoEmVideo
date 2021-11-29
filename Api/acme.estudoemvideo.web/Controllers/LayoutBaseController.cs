@@ -202,7 +202,7 @@ namespace acme.estudoemvideo.web.Controllers
                 }
                 else
                 {
-                    RedirectToAction("/Erro/Erro403Interno", true);
+                    Response.Redirect("/Erro/Erro403Interno", true);
                     RemoverPermissao();
                 }
             }

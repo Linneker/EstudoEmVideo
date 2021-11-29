@@ -1,0 +1,102 @@
+﻿@model acme.estudoemvideo.util.ViewModel.Diary.AnoLetivoViewModel
+
+@{
+    Layout = null;
+    ViewData["Title"] = "Cadastro Ano Letivo";
+    List<SelectListItem> materias = (List<SelectListItem>)ViewBag.Materias;
+
+    bool insert = bool.Parse(Context.User.Claims.Where(t => t.Type.Equals("Insert")).Select(t => t.Value).FirstOrDefault());
+    bool update = bool.Parse(Context.User.Claims.Where(t => t.Type.Equals("Update")).Select(t => t.Value).FirstOrDefault());
+    bool delete = bool.Parse(Context.User.Claims.Where(t => t.Type.Equals("Delete")).Select(t => t.Value).FirstOrDefault());
+    bool read = bool.Parse(Context.User.Claims.Where(t => t.Type.Equals("Read")).Select(t => t.Value).FirstOrDefault());
+
+    string botao = "";
+    if (update && delete && read)
+    {
+        botao = "botaoEditarDeletarVisualizar";
+    }
+    else if (update && delete)
+    {
+        botao = "botaoEditarEDeletar";
+    }
+    else if (update)
+    {
+        botao = "botaoEditar";
+    }
+    else if (delete)
+    {
+        botao = "botaoDeletar";
+    }
+    else if (read)
+    {
+        botao = "botaoVisualizar";
+    }
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <form action="/AnoLetivo/Cadastro" onsubmit="submit_default(this, 'Cadastrado', 'POST', 'md_default', 'Ano Letivo', '/AnoLetivo/GetDadosTable', 'tabela_ano_letivo', [{ data: 'ano' }, { data: 'mes' }, { data: 'dia' }, { data: 'feiradoNacional' }, { data: 'feiradoEstadual' }, { data: 'feiradoMunicipal' }, { data: 'feiradoEscolar' }, { data: 'diaLetivo' }, { data: 'feriadoFixo',render: function (data, type) {if (data === 1) {return 'Sim';}if (data === 0) {return 'Não';}} }, {data: 'status',render: function (data, type) {if (data === 0) {return 'Ativo';}if (data === 1) {return 'Inativo';}}}, { data : '@botao' }]); return false;">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Ano" class="control-label"></label>
+                    <input asp-for="Ano" class="form-control" />
+                    <span asp-validation-for="Ano" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Mes" class="control-label"></label>
+                    <input asp-for="Mes" class="form-control" />
+                    <span asp-validation-for="Mes" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Dia" class="control-label"></label>
+                    <input asp-for="Dia" class="form-control" />
+                    <span asp-validation-for="Dia" class="text-danger"></span>
+                </div>
+                <div class="form-group d-flex justify-content-center">
+                    <div class="form-check form-switch">
+                        <input id="feriado_nacional_ano_letivo" type="checkbox" asp-for="FeiradoNacional" class="form-check-input" />
+                        <label class="form-check-label" for="feriado_nacional_ano_letivo">Feriado Nacional</label>
+                        <span asp-validation-for="FeiradoNacional" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group d-flex justify-content-center">
+                    <div class="form-check form-switch">
+                        <input id="feriado_estadual_ano_letivo" type="checkbox" asp-for="FeiradoEstadual" class="form-check-input" />
+                        <label class="form-check-label" for="feriado_estadual_ano_letivo">Feriado Estadual</label>
+                        <span asp-validation-for="FeiradoEstadual" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group d-flex justify-content-center">
+                    <div class="form-check form-switch">
+                        <input id="feriado_municipal_ano_letivo" type="checkbox" asp-for="FeiradoMunicipal" class="form-check-input" />
+                        <label class="form-check-label" for="feriado_municipal_ano_letivo">Feriado Municipal</label>
+                        <span asp-validation-for="FeiradoMunicipal" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group d-flex justify-content-center">
+                    <div class="form-check form-switch">
+                        <input id="feriado_escolar_ano_letivo" type="checkbox" asp-for="FeiradoEscolar" class="form-check-input" />
+                        <label class="form-check-label" for="feriado_escolar_ano_letivo">Feriado Escolar</label>
+                        <span asp-validation-for="FeiradoEscolar" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group d-flex justify-content-center">
+                    <div class="form-check form-switch">
+                        <input id="dia_letivo_ano_letivo" type="checkbox" asp-for="DiaLetivo" class="form-check-input" />
+                        <label class="form-check-label" for="dia_letivo_ano_letivo">Dia Letivo</label>
+                        <span asp-validation-for="DiaLetivo" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group d-flex justify-content-center">
+                    <div class="form-check form-switch">
+                        <input id="feriado_fixo_ano_letivo" type="checkbox" asp-for="FeriadoFixo" class="form-check-input" />
+                        <label class="form-check-label" for="feriado_fixo_ano_letivo">Feriado Fixo</label>
+                        <span asp-validation-for="FeriadoFixo" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Cadastrar" class="btn btn-primary" />
+                </div>
+            </form>
+    </div>
+</div>
